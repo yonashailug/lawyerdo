@@ -1,0 +1,4 @@
+<ul *ngIf="courses.length; else empty">
+  <li *ngFor="let course of courses">{{ course.name }} : {{ course.code }} </li>
+</ul>
+<ng-template #empty>No courses</ng-template>

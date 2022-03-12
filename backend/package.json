@@ -1,0 +1,32 @@
+{
+  "name": "homework-06-yonashailug",
+  "version": "1.0.0",
+  "description": "Create an Express application that implements a Restful Stateless API for an entity called `students`:\r ```javascript\r let students = [{id: 1, name: \"Asaad Saad\", course: \"CS572\", grade: 95}]\r ```\r * Take into consideration that `students` entity should be treated as an immutable data structure.\r * Have in mind to have a separation between the Routing layer and the Controllers layer. \r * Write routes for the following CRUD operations and use the proper HTTP verbs (`GET` one and all,`POST`, `PUT`, and `DELETE`).\r * Test with `HTTP Client` extension for VSCode. (or any other client)\r * Your API accepts and returns `JSON` data from/to req/res body.\r * Log all requests to a file `access.log` using `morgan` middleware. \r * For your `POST` and `PUT` routes, create and apply a custom middleware to verify if a the `JSON` object contains `name`, `course` and `grade`, otherwise send back an error.\r * Accept all cross-domain XHR requests using `cors` middleware.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maharishi-university/homework-06-yonashailug.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maharishi-university/homework-06-yonashailug/issues"
+  },
+  "homepage": "https://github.com/maharishi-university/homework-06-yonashailug#readme",
+  "dependencies": {
+    "argon2": "^0.28.5",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "express-jwt": "^6.1.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^4.4.0",
+    "mongoose": "^6.2.5",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.4"
+  }
+}
