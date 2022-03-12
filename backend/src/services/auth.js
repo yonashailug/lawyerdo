@@ -79,9 +79,7 @@ module.exports = {
   verify: async({ email }) => {
 
     const userRecord = await userModel.findOne({ email })
-    if (!userRecord) {
-      throw new Error(`User doesn't exist.`)
-    }
+    if (!userRecord) return false
 
     return true
   }

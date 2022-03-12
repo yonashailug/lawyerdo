@@ -1,6 +1,14 @@
 <form [formGroup]="signupForm" (submit)="signup()">
   <input name="name"  formControlName="name" />
   <input name="email"  formControlName="email" />
+  <div *ngIf="email.invalid && (email.dirty || email.touched)">
+    <p class="help is-danger" *ngIf="email.hasError('required')">
+      Email is invalid.
+    </p>
+    <p *ngIf="email.hasError('exists')">
+      Email already exists.
+    </p>
+  </div>
   <input type="password" name="password" formControlName="password" />
   <button type="submit" [disabled]="!signupForm.valid">Signup</button>
 </form>

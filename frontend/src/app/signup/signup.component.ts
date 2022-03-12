@@ -1,8 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AbstractControl, AsyncValidator, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable, of, Subscription } from 'rxjs';
-import { map, pluck } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
 
 import { User } from '../shared/model/user';
 import { SignupService } from './signup.service';
@@ -26,9 +25,10 @@ export class SignupComponent implements OnDestroy, OnInit {
 
   ngOnInit(): void {
     this.signupForm = this.formBuilder.group({
-      email: ['', Validators.compose([Validators.required,
-         Validators.email,
-          this.signupService.emailValidator()])],
+      email: ['', Validators.compose([
+        Validators.required,
+         Validators.email]),
+         this.emailValidator.bind(this)],
       password: ['', Validators.required],
       name: ['', Validators.required],
     })
@@ -36,12 +36,9 @@ export class SignupComponent implements OnDestroy, OnInit {
 
   signup() {
 
-    const email: string = this.signupForm.get('email')!.value;
-    const password: string = this.signupForm.get('password')!.value;
-    const name: string = this.signupForm.get('name')!.value;
-
-    //TODO: - Validate email: @,.,length,
-    //TODO: - Validate password: Accepts only string type
+    const email: string = this.signupForm.get('email')!.value
+    const password: string = this.signupForm.get('password')!.value
+    const name: string = this.signupForm.get('name')!.value
 
     this.subscriptions[0] = this.signupService.signup(User.fromObject({ email, password, name }))
     .subscribe(data => {
@@ -50,17 +47,15 @@ export class SignupComponent implements OnDestroy, OnInit {
 
   }
 
-  // checkEmail(control: AbstractControl): Observable<ValidationErrors | null> {
+  get email() {
+    return this.signupForm.get('email')!
+  }
 
-  //   // if (!control.value) return of(null)
+  emailValidator(control: FormControl): 
+  Promise<{ [key: string]: boolean } | null> | Observable<{ [key: string]: boolean } | null> {
 
-  //   return this.signupService.checkEmail(control.value).pipe(map(({data}: any) => { invalidAsync: data.exists }))
-  // }
-  // checkEmail(control: AbstractControl): Observable<ValidationErrors|null> {
-  //   console.log(control.value)
-  //   return this.signupService.checkEmail(control.value);//.pipe(map(data => data ? null: { invalidAsync: true }))
-  //   // return of({ invalidAsync: true }) //this.signupService.checkEmail(control.value).pipe(map(data => data ? null: { invalidAsync: true }))
-  // }
+    return this.signupService.checkEmail(control.value)
+  }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription: Subscription) => subscription.unsubscribe())

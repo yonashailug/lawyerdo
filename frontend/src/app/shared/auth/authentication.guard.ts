@@ -15,12 +15,12 @@ export class AuthenticationGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     
     if (this.authenticationService.isUserAlreadySignIn()) {
-        return true;
+        return true
     }
 
     this.router.navigateByUrl('signin')
 
-    return false;
+    return false
 
   }
   
