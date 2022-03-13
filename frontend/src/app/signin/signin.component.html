@@ -1,6 +1,16 @@
-
 <form [formGroup]="signinForm" (submit)="signin()">
-  <input name="email"  formControlName="email" />
-  <input type="password" name="password" formControlName="password" />
+  <app-input
+    [name]="'email'"
+    formControlName="email"
+    (inputOnBlurEvent)="setFormData($event)"
+  ></app-input>
+  <app-input
+    [name]="'password'"
+    formControlName="password"
+    [type]="'password'"
+    (inputOnBlurEvent)="setFormData($event)"
+  ></app-input>
+  <!-- <input name="email" formControlName="email" />
+  <input type="password" name="password" formControlName="password" /> -->
   <button type="submit" [disabled]="!signinForm.valid">Login</button>
 </form>
