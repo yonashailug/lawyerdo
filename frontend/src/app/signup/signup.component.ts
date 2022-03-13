@@ -9,7 +9,7 @@ import { SignupService } from './signup.service';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css'],
+  styleUrls: ['./signup.component.scss'],
   providers: [SignupService]
 })
 export class SignupComponent implements OnDestroy, OnInit {

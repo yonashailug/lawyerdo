@@ -7,7 +7,7 @@ import { SigninService } from './signin.service';
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
-  styleUrls: ['./signin.component.css'],
+  styleUrls: ['./signin.component.scss'],
   // providers: [SigninService]
 })
 export class SigninComponent implements OnInit {

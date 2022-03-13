@@ -13,38 +13,41 @@
   <button type="submit" [disabled]="!signupForm.valid">Signup</button>
 </form> -->
 
-<div class="w-full bg-white">
+<div class="w-full">
   <div class="w-full flex flex-row h-full">
-    <div class="w-full">
-      <form [formGroup]="signupForm" (submit)="handleSubmit()"
-        class="flex items-center justify-center px-8 h-screen">
+    <div class="w-full flex justify-center">
+
         <div class="modal-dialog">
-          <div class="modal-content p-4">
-            <div class="modal-body">
-              <div class="block">
-                <h4 class="m-auto text-center mb-1 font-bold text-lg">Login</h4>
-              </div>
+          <div class="modal-content">
+            <form [formGroup]="signupForm" (submit)="handleSubmit()"
+            class="w-full h-full">
+              <div class="modal-body p-4">
+                <div class="block">
+                  <h4 class="m-auto mb-2 font-bold">Register</h4>
+                </div>
 
-              <div class="formField">
-                  <label class="formFieldLabel" htmlFor="username">Username</label>
-                  <div class="relative">
-                      <Input name="username" />
-                  </div>
-                  <div class="formFieldTip"></div>
-              </div>
+                <div class="formField">
+                    <label class="formFieldLabel" htmlFor="email">Email</label>
+                    <div class="relative">
+                        <app-input></app-input>
+                    </div>
+                    <div class="formFieldTip"></div>
+                </div>
 
-              <div class="formField">
-                  <label class="formFieldLabel" htmlFor="username">Password</label>
-                  <div class="relative">
-                      <Input name="password" type="password" />
-                  </div>
-                  <div class="formFieldTip"></div>
+                <div class="formField">
+                    <label class="formFieldLabel" htmlFor="password">Password</label>
+                    <div class="relative">
+                        <app-input [type]="'password'"></app-input>
+                    </div>
+                    <div class="formFieldTip"></div>
+                </div>
               </div>
-            </div>
+            </form>
 
-            <div class="modal-footer mt-4">
+            <div class="modal-footer p-4">
               <div class="text-center">
-                <Button class="w-full" type="submit" [disabled]="!signupForm.valid">Login</Button>
+                <app-button [class]="'w-full'" type="submit">Signup</app-button>
+                <!-- <app-button class="w-full" type="submit" [disabled]="!signupForm.valid">Login</app-button> -->
               </div>
               <!-- <div class="mt-4">
                 <Button class="w-full mb-4" variant="empty" onClick={() => navigate("/add-buyer")}>Register as Buyer</Button>
@@ -53,7 +56,6 @@
             </div>
           </div>
         </div>
-      </form>
     </div>
   </div>
 </div>

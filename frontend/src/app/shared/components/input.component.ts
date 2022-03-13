@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
 
 @Component({
-  selector: 'Input',
+  selector: 'app-input',
   template: `
       <div class="inputContainer">
       <input
