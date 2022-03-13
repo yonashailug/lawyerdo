@@ -18,7 +18,7 @@ const Room = new mongoose.Schema(
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: 'User'
+      ref: 'User', // Reference to the actual user model
     },
     members: {
       type: Array,

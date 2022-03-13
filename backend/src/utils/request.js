@@ -1,4 +1,5 @@
 const axios = require('axios')
+
 const { eyesonApiKey, eyesonApiUrl } = require('../config')
 
 const API_CALL = axios.create({
@@ -11,7 +12,7 @@ module.exports = async function makeRequest(path, data, method = 'POST') {
 
   try {
 
-    let response = await API_CALL({
+    const response = await API_CALL({
       url: path,
       method,
       data,
