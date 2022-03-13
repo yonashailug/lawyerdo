@@ -1,12 +1,10 @@
 <form [formGroup]="signinForm" (submit)="signin()">
   <app-input
     [name]="'email'"
-    formControlName="email"
     (inputOnBlurEvent)="setFormData($event)"
   ></app-input>
   <app-input
     [name]="'password'"
-    formControlName="password"
     [type]="'password'"
     (inputOnBlurEvent)="setFormData($event)"
   ></app-input>

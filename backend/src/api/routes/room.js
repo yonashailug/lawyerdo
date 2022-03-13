@@ -85,7 +85,7 @@ module.exports = (app) => {
             const { data } = await makeRequest('rooms', requestData)
 
             const room = {
-                roomId: data.room.id,
+                roomId: data.room.id, // Mark: - From eyeson
                 name,
                 userId: userId,
                 members: [userId],

@@ -42,7 +42,8 @@ export class SigninComponent implements OnInit {
   }
 
   setFormData(data: any) {
-    this.inputBinder.setInputData(data, this.signinForm);
+    this.signinForm.get(data.name)?.patchValue(data.value);
+    // this.inputBinder.setInputData(data, this.signinForm);
   }
 
   getUserFromToken(data: { token: string; user: Object }): void {
@@ -51,7 +52,7 @@ export class SigninComponent implements OnInit {
       this.tokenService.saveToken(token);
       this.tokenService.saveUser(data.user);
       if (token) {
-        this.router.navigateByUrl('/protected');
+        this.router.navigateByUrl('signup')
       }
     } catch (err) {
       console.log(err);
