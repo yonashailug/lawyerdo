@@ -2,7 +2,7 @@ const { Router } = require('express')
 
 const auth = require('./routes/auth')
 const upload = require('./routes/upload')
-const course = require('./routes/course')
+const room = require('./routes/room')
 
 module.exports = () => {
 
@@ -10,7 +10,7 @@ module.exports = () => {
 
     auth(app)
     upload(app)
-    course(app)
+    room(app)
 
     return app
 }

@@ -17,8 +17,9 @@ export class AppInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     // TODO: - Append authorization header once
     if (this.tokenService.getToken()) {
-      const clone = request.clone({ setHeaders: { Authorization: `Bearer ${this.tokenService.getToken()}` } })
-      return next.handle(clone);
+      const clone = request.clone({
+        setHeaders: { Authorization: `Bearer ${this.tokenService.getToken()}` } })
+      return next.handle(clone)
     }
 
     return next.handle(request)
