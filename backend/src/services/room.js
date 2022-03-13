@@ -7,5 +7,5 @@ module.exports = {
     deleteById: (id) => roomModel.deleteOne({ _id: id }),
     getOne: ({ roomId }) => roomModel.findOne({ roomId }),
     updateById: (id, data) => roomModel.updateOne({ _id: id }, { ...data }),
-    getAllPopulated: (filter) => roomModel.find(filter).populate('userId').select('-password')
+    getAllPopulated: (filter) => roomModel.find(filter).populate('userId', '-password')
 }

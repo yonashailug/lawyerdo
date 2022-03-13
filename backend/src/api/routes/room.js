@@ -9,11 +9,11 @@ const { isAuthenticated, currentUser } = require('../middlewares')
 
 const route = Router()
 
-async function addMemberDetails(rooms) {
+async function addMembersDetail(rooms) {
     for (let i = 0; i < rooms.length; i++) {
-      let membersProfile = []
+      const membersProfile = []
       for (let member of rooms[i].members) {
-        let memberProfile = await userService.getById(member)
+        const memberProfile = await userService.getById(member)
         if (memberProfile) membersProfile.push(memberProfile)
       }
       rooms[i].membersProfile = membersProfile
@@ -30,13 +30,12 @@ module.exports = (app) => {
 
         const { userId } = req.user
 
-        // TODO: - Fix password on the response
         const rooms = await roomService
         .getAllPopulated({
             members: { $in: [userId] },
           })
 
-        const populatedRooms = await addMemberDetails(rooms.slice())
+        const populatedRooms = await addMembersDetail(rooms.slice())
 
         return res.status(200).json({
             data: populatedRooms
@@ -45,8 +44,6 @@ module.exports = (app) => {
     
     // Mark - Get specific room by roomId
     route.get('/:roomId', isAuthenticated, currentUser, async(req, res) => {
-        
-        console.log(req.user)
 
         const { userId } = req.user
         const { roomId } = req.params
