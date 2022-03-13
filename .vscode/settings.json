@@ -33,7 +33,7 @@
   "workbench.iconTheme": "file-icons",
   "workbench.list.smoothScrolling": true,
   "workbench.preferredDarkColorTheme": "Vitesse Dark",
-  "workbench.preferredLightColorTheme": "Vitesse Light",
+  "workbench.preferredLightColorTheme": "Vitesse Dark",
   "workbench.productIconTheme": "icons-carbon",
   "workbench.sideBar.location": "right",
   "workbench.startupEditor": "newUntitledFile",

@@ -1,1 +1,171 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.flex {
+  display: flex;
+}
+.mr-2 {
+  margin-right: 4px;
+}
+
+.formField {
+  margin-top: 1.25rem;
+}
+.formFieldLabel {
+  display: block;
+  font-size: medium;
+  padding-bottom: 0.25rem;
+
+}
+.formFieldTip {
+  padding-top: 0.25rem;
+}
+
+.relative {
+  position: relative;
+}
+.items-center {
+  align-items: center;
+}
+.w-75 {
+  width: 75%;
+}
+.w-full {
+  width: 100%;
+}
+
+.modal-backdrop {
+  background: rgba(27, 31, 60, 0.54);
+  /* background: rgba(250, 250, 250, 0.8); */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+}
+
+.modal-dialog {
+  width: 30rem;
+  background: rgb(255, 255, 255);
+  /* padding: 1.5rem; */
+  /* box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05); */
+  border-radius: 0.3rem;
+  transition: 0.5s;
+  position: relative;
+  pointer-events: auto;
+}
+.modal-header {
+  padding: 0;
+}
+#register .modal-dialog {
+  /* max-height: 100%; */
+  max-width: var(--width);
+  width: 90%;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  outline: none;
+  height: 1.2rem;
+  width: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-wrap {
+  margin-bottom: 5px;
+}
+
+.cart-container {
+  min-width: 240px;
+}
+
+.cart-min {
+  min-width: 160px;
+}
+
+.textarea {
+  padding: 7px 7px 8px;
+  line-height: 1.28;
+  resize: vertical;
+  box-shadow: transparent 0px 0px 0px 1px;
+  transition: background 0.1s ease 0s;
+  overflow: auto;
+  overflow-y: hidden;
+  width: 100%;
+  border-radius: 3px;
+  appearance: none;
+  outline: none;
+}
+.textarea {
+  border: 1px solid #ddd;
+  background: #F4F5F7;
+}
+.textarea:hover:not(:focus) {
+  background: #F4F5F7;
+}
+.textarea:focus {
+  border: 1px solid #1b1f3c;
+  box-shadow: 0 0 0 1px #1b1f3c;
+  background: white;
+}
+.fakeTa {
+  color: rgb(137, 147, 164);
+  border: 1px solid rgb(223, 225, 230);
+  cursor: text;
+  user-select: none;
+  padding: 12px 16px;
+  border-radius: 4px;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  animation: spin both infinite 0.7s;
+}
+
+.fadeIn {
+  animation: fadeIn 0.2s both;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

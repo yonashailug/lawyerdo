@@ -34,7 +34,7 @@ export class SignupComponent implements OnDestroy, OnInit {
     })
   }
 
-  signup() {
+  handleSubmit() {
 
     const email: string = this.signupForm.get('email')!.value
     const password: string = this.signupForm.get('password')!.value

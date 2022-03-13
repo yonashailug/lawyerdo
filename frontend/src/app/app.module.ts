@@ -7,7 +7,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppInterceptor } from './app.interceptor';
 import { HomeComponent } from './home/home.component';
-import { ProtectedComponent } from './protected/protected.component';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
 import { SharedModule } from './shared/shared.module'
@@ -16,7 +15,6 @@ import { SharedModule } from './shared/shared.module'
   declarations: [
     AppComponent,
     HomeComponent,
-    ProtectedComponent,
     SigninComponent,
     SignupComponent,
   ],

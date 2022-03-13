@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+import { BASE_URL } from '../config'
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,6 +14,6 @@ export class SigninService {
   signin(user: { email: string, password: string }): Observable<any> {
 
     return this.httpClient
-    .post('http://localhost:3000/api/users/login', user)
+    .post(`${BASE_URL}/users/login`, user)
   }
 }

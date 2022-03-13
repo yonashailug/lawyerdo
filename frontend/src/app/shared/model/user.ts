@@ -3,7 +3,7 @@ export enum Status { ACTIVE, INACTIVE }
 
 export class User {
 
-    public static EMPTY_USER = new User();
+    public static EMPTY_USER = new User()
 
     private email: string = ''
     private name: string = ''
@@ -16,9 +16,9 @@ export class User {
     setPassword(value: string) { this.password = value }
 
     public static fromObject(object: Object): User {
-        const user: User = new User();
-        Object.assign(user, object);
-        return user;
+        const user: User = new User()
+        Object.assign(user, object)
+        return user
     }
 
 }

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators'
 
 import { User } from '../shared/model/user';
+import { BASE_URL } from '../config'
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +16,12 @@ export class SignupService {
   signup(user: User): Observable<any> {
 
     return this.httpClient
-    .post('http://localhost:3000/api/users/signup', user)
+    .post(`${BASE_URL}/users/signup`, user)
   }
 
   checkEmail(email: string): Observable<{ [key: string]: boolean } | null> {
-    return this.httpClient.get(`http://localhost:3000/api/users/verify?email=${email}`)
+
+    return this.httpClient.get(`${BASE_URL}/users/verify?email=${email}`)
     .pipe(map(({ data }: any) => data.exists ? data: null ))
   }
 

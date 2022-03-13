@@ -1,5 +1,18 @@
-<h1>App</h1>
 
-<a [routerLink]="['home']">home</a>
+<!-- <a [routerLink]="['home']" >home</a> -->
 <!-- <a [routerLink]="['courses']" [ngStyle]="{ 'padding-left': '8px' }">courses</a> -->
-<router-outlet></router-outlet>
+
+<div class="w-full">
+  <div class="navigation">
+      <div class="main-header flex flex-row h-full">
+          <!-- <Header onClick={handleLogout} /> -->
+      </div>
+  </div>
+  <div class="main-panel">
+    <div class="content">
+      <div class="container-fluid">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>
