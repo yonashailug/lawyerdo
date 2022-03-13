@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const Room = new mongoose.Schema(
   {
     roomId: {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       required: true
     },
     name: {
@@ -16,7 +16,7 @@ const Room = new mongoose.Schema(
       default: ''
     },
     userId: {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: 'User'
     },
