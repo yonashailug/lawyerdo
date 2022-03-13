@@ -16,46 +16,57 @@
 <div class="w-full">
   <div class="w-full flex flex-row h-full">
     <div class="w-full flex justify-center">
-
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <form [formGroup]="signupForm" (submit)="handleSubmit()"
-            class="w-full h-full">
-              <div class="modal-body p-4">
-                <div class="block">
-                  <h4 class="m-auto mb-2 font-bold">Register</h4>
-                </div>
-
-                <div class="formField">
-                    <label class="formFieldLabel" htmlFor="email">Email</label>
-                    <div class="relative">
-                        <app-input></app-input>
-                    </div>
-                    <div class="formFieldTip"></div>
-                </div>
-
-                <div class="formField">
-                    <label class="formFieldLabel" htmlFor="password">Password</label>
-                    <div class="relative">
-                        <app-input [type]="'password'"></app-input>
-                    </div>
-                    <div class="formFieldTip"></div>
-                </div>
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form
+            [formGroup]="signupForm"
+            (submit)="handleSubmit()"
+            class="w-full h-full"
+          >
+            <div class="modal-body p-4">
+              <div class="block">
+                <h4 class="m-auto mb-2 font-bold">Register</h4>
               </div>
-            </form>
 
-            <div class="modal-footer p-4">
-              <div class="text-center">
-                <app-button [class]="'w-full'" type="submit">Signup</app-button>
-                <!-- <app-button class="w-full" type="submit" [disabled]="!signupForm.valid">Login</app-button> -->
+              <div class="formField">
+                <label class="formFieldLabel" htmlFor="email">Email</label>
+                <div class="relative">
+                  <app-input
+                    (inputOnBlurEvent)="setFormData($event)"
+                    [name]="'email'"
+                  ></app-input>
+                </div>
+                <div class="formFieldTip"></div>
               </div>
-              <!-- <div class="mt-4">
+
+              <div class="formField">
+                <label class="formFieldLabel" htmlFor="password"
+                  >Password</label
+                >
+                <div class="relative">
+                  <app-input
+                    (inputOnBlurEvent)="setFormData($event)"
+                    [name]="'password'"
+                    [type]="'password'"
+                  ></app-input>
+                </div>
+                <div class="formFieldTip"></div>
+              </div>
+            </div>
+          </form>
+
+          <div class="modal-footer p-4">
+            <div class="text-center">
+              <app-button [class]="'w-full'" type="submit">Signup</app-button>
+              <!-- <app-button class="w-full" type="submit" [disabled]="!signupForm.valid">Login</app-button> -->
+            </div>
+            <!-- <div class="mt-4">
                 <Button class="w-full mb-4" variant="empty" onClick={() => navigate("/add-buyer")}>Register as Buyer</Button>
                 <Button class="w-full" variant="empty" onClick={() => navigate("/add-seller")}>Register as Seller</Button>
               </div> -->
-            </div>
           </div>
         </div>
+      </div>
     </div>
   </div>
 </div>
