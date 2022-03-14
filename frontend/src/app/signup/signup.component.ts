@@ -49,10 +49,15 @@ export class SignupComponent implements OnDestroy, OnInit {
 
     this.subscriptions[0] = this.signupService
       .signup(User.fromObject({ email, password, name }))
-      .subscribe((data) => {
-        this.tokenService.saveToken(data.token);
-        this.tokenService.saveUser(data.user);
-        this.router.navigate(['signin']);
+      .subscribe({
+        next: (data) => {
+          this.tokenService.saveToken(data.token);
+          this.tokenService.saveUser(data.user);
+          this.router.navigate(['signin']);
+        },
+        error: (res) => {
+          console.error(res);
+        },
       });
   }
 

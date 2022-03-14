@@ -41,7 +41,7 @@ export class NewroomComponent implements OnInit {
 
     alert('Creating the room: ' + name);
     this.roomService.createRoom({ name }).subscribe((data) => {
-      this.router.navigate(['roomlist']);
+      this.router.navigate(['dashboard']);
     });
   }
 
@@ -51,7 +51,7 @@ export class NewroomComponent implements OnInit {
       this.tokenService.saveToken(token);
       this.tokenService.saveUser(data.user);
       if (token) {
-        this.router.navigate(['signup']);
+        this.router.navigate(['dashboard']);
       }
     } catch (err) {
       console.log(err);

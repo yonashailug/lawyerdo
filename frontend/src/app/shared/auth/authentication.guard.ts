@@ -30,7 +30,7 @@ export class AuthenticationGuard implements CanActivate {
       this.router.navigate(['dashboard']);
     }
 
-    this.router.navigateByUrl('signin');
+    this.router.navigate(['signin']);
 
     return false;
   }
