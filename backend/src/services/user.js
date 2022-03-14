@@ -1,5 +1,7 @@
 const userModel = require('../models/user')
 
 module.exports  = {
-  getById: async(id) => await userModel.findById(id).select('-password')
+  getById: (id) => userModel.findById(id),
+  create: (data) => userModel.create(data),
+  getOne: (filter) => userModel.findOne({ ...filter }),
 }

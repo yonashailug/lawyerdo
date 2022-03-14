@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 
-const Room = new mongoose.Schema(
-  {
+const Room = new mongoose.Schema({
     roomId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true
@@ -30,6 +29,17 @@ const Room = new mongoose.Schema(
     },
     membersProfile: Object,
   },
-  { timestamps: true })
+  {
+    timestamps: true,
+    toJSON: {
+      transform: function(doc, ret, options) {
+        ret.id = ret._id;
+        delete ret._id;
+        delete ret.__v;
+        ret.owner = ret.userId;
+        delete ret.userId;
+      },
+  } 
+})
 
 module.exports = mongoose.model('Room', Room)

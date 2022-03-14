@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken')
 const { randomBytes } = require('crypto')
 const argon2 = require('argon2')
 
-const userModel = require('../models/user')
+const userService = require('./user')
 const config = require('../config')
 
 function generateToken(user) {
@@ -13,7 +13,7 @@ function generateToken(user) {
 
   return jwt.sign(
     {
-      _id: user._id, // We are gonna use this in the middleware 'isAuth'
+      id: user.id, // We are gonna use this in the middleware 'isAuth'
       role: user.role,
       name: user.name,
       exp: exp.getTime() / 1000,
@@ -26,49 +26,41 @@ module.exports = {
   signup: async(data) => {
 
     try {
+
       const salt = randomBytes(32)
 
       const hashedPassword = await argon2.hash(data.password, { salt })
 
-      const userRecord = await userModel.create({
+      const user = await userService.create({
         ...data,
         password: hashedPassword,
       })
 
-      const token = generateToken(userRecord)
+      const token = generateToken(user)
 
-      if (!userRecord) {
+      if (!user) {
         throw new Error('User cannot be created')
       }
 
-      const user = userRecord.toObject()
-      Reflect.deleteProperty(user, 'password')
-      Reflect.deleteProperty(user, 'salt')
-
       return { user, token }
 
-    } catch(e) {
-      throw e
+    } catch(error) {
+      throw error
     }
   },
   signin: async({ email, password }) => {
 
-    const userRecord = await userModel.findOne({ email })
-    if (!userRecord) {
+    const user = await userService.getOne({ email })
+    if (!user) {
       throw new Error(`User doesn't exist.`)
     }
 
     // Mark: Prevent from 'timing based' attacks
-    const validPassword = await argon2.verify(userRecord.password, password)
+    const validPassword = await argon2.verify(user.password, password)
 
     if (validPassword) {
 
-      const token = generateToken(userRecord)
-
-      const user = userRecord.toObject()
-
-      Reflect.deleteProperty(user, 'password')
-      Reflect.deleteProperty(user, 'salt')
+      const token = generateToken(user)
 
       return { user, token }
 
@@ -78,7 +70,7 @@ module.exports = {
   },
   verify: async({ email }) => {
 
-    const userRecord = await userModel.findOne({ email })
+    const userRecord = await userService.getOne({ email })
     if (!userRecord) return false
 
     return true
