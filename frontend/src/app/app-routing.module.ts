@@ -15,8 +15,16 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, canActivate: [AppGuard] },
   // { path: 'protected', component: ProtectedComponent, canActivate: [AuthenticationGuard] },
-  { path: 'signin', component: SigninComponent },
-  { path: 'signup', component: SignupComponent },
+  {
+    path: 'signin',
+    component: SigninComponent,
+    canActivate: [AuthenticationGuard],
+  },
+  {
+    path: 'signup',
+    component: SignupComponent,
+    canActivate: [AuthenticationGuard],
+  },
   { path: 'stream/:roomId/:type', component: VideoComponent },
   { path: 'dashboard/room/create', component: NewroomComponent },
   { path: 'dashboard', component: DashboardComponent },

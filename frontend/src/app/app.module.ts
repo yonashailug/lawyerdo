@@ -15,6 +15,7 @@ import { NewroomComponent } from './newroom/newroom.component';
 import { RoomlistComponent } from './roomlist/roomlist.component';
 import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 import { RoomdetailComponent } from './roomdetail/roomdetail/roomdetail.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { RoomdetailComponent } from './roomdetail/roomdetail/roomdetail.componen
     RoomlistComponent,
     DashboardComponent,
     RoomdetailComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
