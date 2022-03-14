@@ -18,12 +18,12 @@ const routes: Routes = [
   {
     path: 'signin',
     component: SigninComponent,
-    canActivate: [AuthenticationGuard],
+    // canActivate: [AuthenticationGuard],
   },
   {
     path: 'signup',
     component: SignupComponent,
-    canActivate: [AuthenticationGuard],
+    // canActivate: [AuthenticationGuard],
   },
   { path: 'stream/:roomId/:type', component: VideoComponent },
   { path: 'dashboard/room/create', component: NewroomComponent },

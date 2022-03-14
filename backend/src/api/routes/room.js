@@ -252,6 +252,7 @@ module.exports = (app) => {
   route.post('/:roomId', isAuthenticated, currentUser, async (req, res) => {
     const { userId } = req.user;
     const { roomId } = req.params;
+    console.log(roomId)
 
     const { name } = await userService.getById(userId);
 

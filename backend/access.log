@@ -477,3 +477,11 @@
 ::1 - - [14/Mar/2022:17:13:11 +0000] "GET /api/rooms HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36"
 >>>>>>> 799588a16a7f8d9deda9d031a932d75309b74dfb
 >>>>>>> 2b15b5cf2a6ab1ec18b114c43cb678cbbef97ec7
+::1 - - [14/Mar/2022:19:59:47 +0000] "GET /api/rooms HTTP/1.1" 200 590 "-" "PostmanRuntime/7.29.0"
+::1 - - [14/Mar/2022:20:06:51 +0000] "POST /api/users/login HTTP/1.1" 200 374 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36"
+::1 - - [14/Mar/2022:20:06:52 +0000] "GET /api/rooms HTTP/1.1" 200 590 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36"
+::1 - - [14/Mar/2022:20:07:45 +0000] "POST /api/rooms/622e57bcd81b00000f7dc584 HTTP/1.1" 200 2522 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36"
+::1 - - [14/Mar/2022:20:09:55 +0000] "POST /api/rooms/622e57bcd81b00000f7dc584/stop HTTP/1.1" 200 71 "-" "PostmanRuntime/7.29.0"
+::1 - - [14/Mar/2022:20:15:10 +0000] "POST /api/rooms/622e57bcd81b00000f7dc584 HTTP/1.1" 200 2522 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36"
+::1 - - [14/Mar/2022:20:16:15 +0000] "POST /api/rooms/622e57bcd81b00000f7dc584/stop HTTP/1.1" 200 71 "-" "PostmanRuntime/7.29.0"
+::1 - - [14/Mar/2022:20:21:35 +0000] "POST /api/rooms/622e57bcd81b00000f7dc584 HTTP/1.1" 200 2522 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36"

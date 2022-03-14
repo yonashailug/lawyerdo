@@ -58,7 +58,7 @@ export class VideoComponent implements OnInit, OnDestroy {
     } else {
       this.startRoom();
       //TODO: Delete me
-      this.startStream();
+      // this.startStream();
     }
   }
 
