@@ -10,5 +10,7 @@
   </div>
   <div class="main-panel">
     <router-outlet></router-outlet>
+
+    <ul> <li *ngFor="let user of users">{{user._id}} - {{user.name}}</li> </ul>
   </div>
 </div>
