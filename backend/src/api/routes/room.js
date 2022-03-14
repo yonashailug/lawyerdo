@@ -29,7 +29,6 @@ module.exports = (app) => {
   route.get('', isAuthenticated, currentUser, async (req, res) => {
     const { userId } = req.user;
 
-    // TODO: - Fix password on the response
     const rooms = await roomService.getAllPopulated({
       members: { $in: [userId] },
     });
@@ -43,7 +42,6 @@ module.exports = (app) => {
 
   // Mark - Get specific room by roomId
   route.get('/:roomId', isAuthenticated, currentUser, async (req, res) => {
-    console.log(req.user);
 
     const { userId } = req.user;
     const { roomId } = req.params;

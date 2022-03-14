@@ -3,7 +3,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { User } from './shared/model/user';
 import { store } from './shared/store/store'
 import { addUser } from './shared/store/actions'
-import { Subscription } from 'rxjs';
+import { StorageService } from './shared/services/storage.service';
+import { USER_KEY } from './config';
+import { UserService } from './shared/services/user.service';
 
 
 @Component({
@@ -14,21 +16,17 @@ import { Subscription } from 'rxjs';
 export class AppComponent implements OnInit, OnDestroy {
 
   title = 'frontend';
-  users: any = []
-  subscription: any = {}
+  user: User = User.EMPTY_USER
+  subscription: any = []
 
-  constructor() {
-    this.subscription = store.subscribe(() => { this.users = store.getState().data })
+  constructor(private userService: UserService) {
+    this.subscription = store.subscribe(() => { this.user = store.getState().user })
   }
 
   ngOnInit(): void {
-    this.users = store.getState().data
-
-    this.addUser(User.fromObject({_id: 1, name: 'Jonas', email: 'yonashailug@gmail.com' }))
-  }
-
-  addUser(user: User) {
-    store.dispatch(addUser(user))
+    if (Object.keys(this.user).length) {
+      store.dispatch(addUser(User.fromObject(this.userService.getUser())))
+    }
   }
 
   ngOnDestroy(){ this.subscription.unsubscribe() }

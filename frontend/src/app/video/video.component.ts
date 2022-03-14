@@ -4,6 +4,9 @@ import eyeson, { StreamHelpers } from 'eyeson';
 
 import { StorageService } from '../shared/services/storage.service'
 import { VideoService } from './video.service';
+import { store } from '../shared/store/store'
+import { updateRoom } from '../shared/store/actions';
+import { Room } from '../shared/model/room';
 
 @Component({
   selector: 'app-video',
@@ -23,7 +26,8 @@ export class VideoComponent implements OnInit, OnDestroy {
   video: boolean = true
   type: string = ''
   showCanvas: boolean = false
-  room: any = {}
+  room: Room = Room.EMPTY_ROOM
+  subscriptions: any = []
 
   @ViewChild('videoRef') videoRef: any = null;
 
@@ -34,6 +38,8 @@ export class VideoComponent implements OnInit, OnDestroy {
 
     this.roomId = this.activatedRoute.snapshot.paramMap.get('roomId')!
     this.type = this.activatedRoute.snapshot.paramMap.get('type')!
+
+    this.subscriptions[0] = store.subscribe(() => { this.room = store.getState().room })
 
     console.log(this.roomId)
     console.log(this.type)
@@ -62,8 +68,12 @@ export class VideoComponent implements OnInit, OnDestroy {
     return new Promise((resolve) => {
       this.videoService.post(`rooms/${this.roomId}`, {})
       .subscribe(({ data }) => {
-        this.room = {...data.room }
-        this.room['access_key'] = data.access_key
+
+        store.dispatch(updateRoom(data.room))
+
+        // this.room = {...data.room }
+        this.room.setAccessKey(data.access_key)
+        // this.room['access_key'] = data.access_key
         console.log(this.room)
         resolve(data)
       })
@@ -101,7 +111,7 @@ export class VideoComponent implements OnInit, OnDestroy {
     }
 
     if (joined) {
-      accessKeys[this.roomId] = this.room.access_key;
+      accessKeys[this.roomId] = this.room.getAccessKey();
       this.storageService.setItem('access_key', accessKeys);
       this.startStream();
     }
@@ -230,6 +240,7 @@ export class VideoComponent implements OnInit, OnDestroy {
       this.local = event.localStream;
       this.stream = event.remoteStream;
 
+      console.log(this.videoRef)
       this.videoSrc = this.videoRef.nativeElement
       console.log('stream_update');
       // console.log('videoSrc: ', this.videoSrc);

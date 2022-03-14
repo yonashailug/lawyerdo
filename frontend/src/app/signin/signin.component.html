@@ -41,7 +41,8 @@
 
           <div class="modal-footer p-4">
             <div class="text-center">
-              <app-button [class]="'w-full'" type="submit">Login</app-button>
+              <button (click)="signin()">Login</button>
+              <!-- <app-button [class]="'w-full'" type="submit">Login</app-button> -->
             </div>
             <div>
               <a [routerLink]="['/', 'signup']"> Don't have an account? </a>
