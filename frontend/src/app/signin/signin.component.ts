@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { InputBinderService } from '../shared/services/input-binder.service';
 import { TokenService } from '../shared/services/token.service';
 import { SigninService } from './signin.service';
 
@@ -18,7 +17,6 @@ export class SigninComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private tokenService: TokenService,
-    private inputBinder: InputBinderService,
     private signinService: SigninService
   ) {
     this.signinForm = this.formBuilder.group({
@@ -43,7 +41,6 @@ export class SigninComponent implements OnInit {
 
   setFormData(data: any) {
     this.signinForm.get(data.name)?.patchValue(data.value);
-    // this.inputBinder.setInputData(data, this.signinForm);
   }
 
   getUserFromToken(data: { token: string; user: Object }): void {
@@ -52,7 +49,7 @@ export class SigninComponent implements OnInit {
       this.tokenService.saveToken(token);
       this.tokenService.saveUser(data.user);
       if (token) {
-        this.router.navigateByUrl('signup')
+        this.router.navigateByUrl('signup');
       }
     } catch (err) {
       console.log(err);

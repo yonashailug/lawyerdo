@@ -3,28 +3,24 @@ import { User } from '../model/user';
 import { TokenService } from '../services/token.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthenticationService {
-
-  constructor(private tokenService: TokenService) { }
+  constructor(private tokenService: TokenService) {}
 
   public isUserAlreadySignIn() {
+    const token: string = this.tokenService.getToken();
 
-    const token: string = this.tokenService.getToken()
-    
-    if (token) return true
+    if (token) return true;
 
-    return false
-
+    return false;
   }
 
   public getUser(): User {
-
     if (this.isUserAlreadySignIn()) {
-      return User.fromObject(this.tokenService.getUser())
+      return User.fromObject(this.tokenService.getUser());
     }
 
-    return User.EMPTY_USER
+    return User.EMPTY_USER;
   }
 }

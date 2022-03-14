@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 
 import { User } from '../shared/model/user';
-import { InputBinderService } from '../shared/services/input-binder.service';
+import { TokenService } from '../shared/services/token.service';
 import { SignupService } from './signup.service';
 
 @Component({
@@ -27,7 +27,7 @@ export class SignupComponent implements OnDestroy, OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private signupService: SignupService,
-    private inputBinder: InputBinderService
+    private tokenService: TokenService
   ) {}
 
   ngOnInit(): void {
@@ -50,13 +50,16 @@ export class SignupComponent implements OnDestroy, OnInit {
     this.subscriptions[0] = this.signupService
       .signup(User.fromObject({ email, password, name }))
       .subscribe((data) => {
-        this.router.navigateByUrl('signin');
+        this.tokenService.saveToken(data.token);
+        this.tokenService.saveUser(data.user);
+        console.log(this.tokenService.getUser(), this.tokenService.getToken());
+        this.router.navigate(['home']);
       });
   }
 
-  get email() {
-    return this.signupForm.get('email')!;
-  }
+  // get email() {
+  //   return this.signupForm.get('email')!;
+  // }
 
   emailValidator(
     control: FormControl
@@ -67,7 +70,31 @@ export class SignupComponent implements OnDestroy, OnInit {
   }
 
   setFormData(data: any) {
-    this.inputBinder.setInputData(data, this.signupForm);
+    this.signupForm.get(data.name)?.patchValue(data.value);
+  }
+
+  checkValid(name: string) {
+    if (name === 'email') {
+      if (this.signupForm.get('email')?.value === '')
+        return `Email is required`;
+      else if (!this.signupForm.get('email')?.valid) {
+        return `Email already exists`;
+      }
+    }
+    if (name === 'name') {
+      if (this.signupForm.get('name')?.value === '') return `Name is required`;
+      else if (!this.signupForm.get('name')?.valid) {
+        return `Invalid Username`;
+      }
+    }
+    if (name === 'password') {
+      if (this.signupForm.get('password')?.value === '')
+        return `Password is required`;
+      else if (!this.signupForm.get('password')?.valid) {
+        return `Invalid Password`;
+      }
+    }
+    return ``;
   }
 
   ngOnDestroy(): void {
