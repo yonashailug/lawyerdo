@@ -43,8 +43,6 @@ module.exports = (app) => {
 
   // Mark - Get specific room by roomId
   route.get('/:roomId', isAuthenticated, currentUser, async (req, res) => {
-    console.log(req.user);
-
     const { userId } = req.user;
     const { roomId } = req.params;
 
