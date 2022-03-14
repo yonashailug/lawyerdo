@@ -5,10 +5,12 @@ export class User {
 
     public static EMPTY_USER = new User()
 
+    private id: string = ''
     private email: string = ''
     private name: string = ''
     private password: string = ''
 
+    getId(): string { return this.id }
     getEmail(): string { return this.email }
     setEmail(value: string) { this.email = value }
     getName(): string { return this.name }

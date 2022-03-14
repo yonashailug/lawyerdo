@@ -442,6 +442,16 @@
 =======
 >>>>>>> 388921fe5411de13ef4eb6ddbd7d5228dc1f1c9b
 ::1 - - [14/Mar/2022:15:16:38 +0000] "GET /api/rooms HTTP/1.1" 200 590 "-" "PostmanRuntime/7.29.0"
+<<<<<<< HEAD
+::1 - - [14/Mar/2022:17:14:13 +0000] "POST /api/users/login HTTP/1.1" 200 374 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36"
+::1 - - [14/Mar/2022:18:32:51 +0000] "POST /api/users/login HTTP/1.1" 200 374 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36"
+::1 - - [14/Mar/2022:18:36:04 +0000] "POST /api/users/login HTTP/1.1" 200 374 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36"
+::1 - - [14/Mar/2022:18:50:21 +0000] "POST /api/users/login HTTP/1.1" 200 373 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36"
+::1 - - [14/Mar/2022:19:34:32 +0000] "GET /api/rooms HTTP/1.1" 200 590 "-" "PostmanRuntime/7.29.0"
+::1 - - [14/Mar/2022:19:34:52 +0000] "GET /api/rooms HTTP/1.1" 200 590 "-" "PostmanRuntime/7.29.0"
+::1 - - [14/Mar/2022:19:43:08 +0000] "GET /api/rooms HTTP/1.1" 200 590 "-" "PostmanRuntime/7.29.0"
+::1 - - [14/Mar/2022:19:45:05 +0000] "GET /api/rooms HTTP/1.1" 200 590 "-" "PostmanRuntime/7.29.0"
+=======
 >>>>>>> eb63bdbe22a979f9091c093c6788e2e0b2d8adf5
 <<<<<<< HEAD
 ::1 - - [14/Mar/2022:16:30:43 +0000] "GET /api/users/verify?email=bat@gmail.com HTTP/1.1" 200 40 "http://localhost:4200/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36"
@@ -466,6 +476,7 @@
 ::1 - - [14/Mar/2022:17:12:37 +0000] "GET /api/rooms HTTP/1.1" 200 4720 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36"
 ::1 - - [14/Mar/2022:17:13:11 +0000] "GET /api/rooms HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36"
 >>>>>>> 799588a16a7f8d9deda9d031a932d75309b74dfb
+<<<<<<< HEAD
 ::1 - - [14/Mar/2022:19:48:19 +0000] "GET /api/rooms HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36"
 ::1 - - [14/Mar/2022:19:48:48 +0000] "GET /api/rooms HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36"
 ::1 - - [14/Mar/2022:19:52:56 +0000] "GET /api/rooms HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36"
@@ -537,3 +548,6 @@
 ::1 - - [14/Mar/2022:20:16:22 +0000] "GET /api/rooms HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36"
 ::1 - - [14/Mar/2022:20:18:18 +0000] "GET /api/rooms HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36"
 ::1 - - [14/Mar/2022:20:18:23 +0000] "GET /api/rooms HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36"
+=======
+>>>>>>> 2b15b5cf2a6ab1ec18b114c43cb678cbbef97ec7
+>>>>>>> 1891ad82132ad231249b8442a09098bf2e102b6b

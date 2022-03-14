@@ -1,14 +1,24 @@
+import { Room } from '../model/room'
+import { User } from '../model/user'
 import { AppState } from './state'
 
 const intialState: AppState = {
-  data: []
+  user: User.EMPTY_USER,
+  room: Room.EMPTY_ROOM,
 }
 
-export function reducer(state: AppState = intialState, action: { type: string, payload: any }) {
+export function reducer(state: AppState = intialState,
+  action: { type: string, payload: any }) {
   switch(action.type) {
     case 'ADD_USER':
       return {
-        data: [ ...state.data, { ...action.payload } ]
+        ...state,
+        user: User.fromObject({ ...state.user, ...action.payload })
+      }
+    case 'UPDATE_ROOM':
+      return {
+        ...state,
+        room: Room.fromObject({ ...state.room, ...action.payload })
       }
     default:
       return state

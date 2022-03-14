@@ -1,5 +1,7 @@
 import { User } from './../model/user'
+import { Room } from '../model/room'
 
 export interface AppState {
-  data: User[]
+  user: User,
+  room: Room
 }

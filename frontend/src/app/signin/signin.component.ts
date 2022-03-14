@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { store } from '../shared/store/store'
+import { addUser } from '../shared/store/actions'
+
 import { TokenService } from '../shared/services/token.service';
 import { SigninService } from './signin.service';
+import { User } from '../shared/model/user';
 
 @Component({
   selector: 'app-signin',
@@ -49,6 +53,11 @@ export class SigninComponent implements OnInit {
       const token = data.token;
       this.tokenService.saveToken(token);
       this.tokenService.saveUser(data.user);
+
+      const user = User.fromObject(data.user)
+
+      store.dispatch(addUser(user))
+
       if (token) {
         this.router.navigate(['dashboard']);
       }

@@ -29,7 +29,6 @@ module.exports = (app) => {
   route.get('', isAuthenticated, currentUser, async (req, res) => {
     const { userId } = req.user;
 
-    // TODO: - Fix password on the response
     const rooms = await roomService.getAllPopulated({
       members: { $in: [userId] },
     });
