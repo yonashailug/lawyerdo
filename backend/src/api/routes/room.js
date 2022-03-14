@@ -40,23 +40,29 @@ module.exports = (app) => {
     });
   });
 
-  // Mark - Get specific room by roomId
-  route.get('/:roomId', isAuthenticated, currentUser, async (req, res) => {
-    const { userId } = req.user;
-    const { roomId } = req.params;
+  // Mark - Get specific room by access_key
+  route.get('/:access_key', isAuthenticated, currentUser, async (req, res) => {
+    
+    try {
 
-    const room = await roomService.getOne({ roomId });
+      const { access_key } = req.params
 
-    if (!room) return res.status(404).json({ errors: 'Room not found.' });
+      const { data } = await makeRequest(`rooms/${access_key}`, {}, 'GET');
 
-    if (room.userId != userId)
-      return res
-        .status(401)
-        .json({ errors: 'You are not allowed to perform this operation.' });
+      return res.status(200).json({
+        data
+      })
 
-    return res.status(200).json({
-      data: room,
-    });
+    } catch (error) {
+      if (!error.response)
+        return res.status(500).json({
+          errors: 'Something went wrong, try again later.',
+        });
+
+      return res.status(error.response.status).json({
+        errors: error.response.data.error,
+      });
+    }
   });
 
   // Mark: - create new room
@@ -252,7 +258,6 @@ module.exports = (app) => {
   route.post('/:roomId', isAuthenticated, currentUser, async (req, res) => {
     const { userId } = req.user;
     const { roomId } = req.params;
-    console.log(roomId)
 
     const { name } = await userService.getById(userId);
 

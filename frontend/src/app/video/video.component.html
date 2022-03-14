@@ -1,4 +1,4 @@
-<div id="loginScreen" class="h-full overflow-hidden">
+<div id="videoScreen" class="h-full overflow-hidden">
   <div class="dropzone">
     <div class="video-stream-container">
       <div *ngIf="!stream" class="py-12">Loading...</div>
@@ -7,7 +7,6 @@
         id="video"
         class="video"
         autoplay
-        ref="video"
         #videoRef
       ></video>
     </div>
@@ -15,7 +14,7 @@
 
   <canvas
     ref="canvas"
-    v-if="showCanvas"
+    *ngIf="showCanvas"
     width="120"
     height="120"
     style="border-radius: 60px; background: #989c9f;"
