@@ -9,6 +9,7 @@ import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
 import { VideoComponent } from './video/video.component';
 import { RoomlistComponent } from './roomlist/roomlist.component';
+import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -17,8 +18,8 @@ const routes: Routes = [
   { path: 'signin', component: SigninComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'stream/:roomId/:type', component: VideoComponent },
-  { path: 'room/create', component: NewroomComponent },
-  { path: 'roomlist', component: RoomlistComponent },
+  { path: 'dashboard/room/create', component: NewroomComponent },
+  { path: 'dashboard', component: DashboardComponent },
   // {
   //   path: 'courses',
   //   data: {

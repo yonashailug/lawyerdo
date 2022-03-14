@@ -50,7 +50,7 @@ export class SigninComponent implements OnInit {
       this.tokenService.saveToken(token);
       this.tokenService.saveUser(data.user);
       if (token) {
-        this.router.navigate(['roomlist']);
+        this.router.navigate(['dashboard']);
       }
     } catch (err) {
       console.log(err);

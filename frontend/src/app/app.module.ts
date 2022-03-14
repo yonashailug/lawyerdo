@@ -13,6 +13,8 @@ import { SharedModule } from './shared/shared.module';
 import { VideoComponent } from './video/video.component';
 import { NewroomComponent } from './newroom/newroom.component';
 import { RoomlistComponent } from './roomlist/roomlist.component';
+import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
+import { RoomdetailComponent } from './roomdetail/roomdetail/roomdetail.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { RoomlistComponent } from './roomlist/roomlist.component';
     VideoComponent,
     NewroomComponent,
     RoomlistComponent,
+    DashboardComponent,
+    RoomdetailComponent,
   ],
   imports: [
     BrowserModule,
