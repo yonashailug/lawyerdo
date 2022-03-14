@@ -10,15 +10,15 @@ const { isAuthenticated, currentUser } = require('../middlewares');
 const route = Router();
 
 async function addMembersDetail(rooms) {
-    for (let i = 0; i < rooms.length; i++) {
-      const membersProfile = []
-      for (let member of rooms[i].members) {
-        const memberProfile = await userService.getById(member)
-        if (memberProfile) membersProfile.push(memberProfile)
-      }
-      rooms[i].membersProfile = membersProfile
+  for (let i = 0; i < rooms.length; i++) {
+    const membersProfile = [];
+    for (let member of rooms[i].members) {
+      const memberProfile = await userService.getById(member);
+      if (memberProfile) membersProfile.push(memberProfile);
     }
-    
+    rooms[i].membersProfile = membersProfile;
+  }
+
   return rooms;
 }
 
@@ -42,7 +42,6 @@ module.exports = (app) => {
 
   // Mark - Get specific room by roomId
   route.get('/:roomId', isAuthenticated, currentUser, async (req, res) => {
-
     const { userId } = req.user;
     const { roomId } = req.params;
 
@@ -116,16 +115,70 @@ module.exports = (app) => {
     if (room.userId == userId || room.members.includes(userId))
       return res.status(200).json({ data: { joined: true, room } });
 
-    const members = [...room.members, userId];
+    try {
+      const requestData = {
+        name,
+        user: {
+          id: userId,
+          name: user.name,
+        },
+      };
 
-    const updated = await roomService.updateById(room._id, { members });
+      // Mark: - Api request to the eyeson api
+      const { data } = await makeRequest('rooms', requestData);
 
-    return res.status(203).json({ data: updated });
+      const room = {
+        roomId: data.room.id, // Mark: - From eyeson
+        name,
+        userId: userId,
+        members: [userId],
+      };
+
+      const created = await roomService.create(room);
+
+      return res.status(200).json({
+        data: created,
+      });
+    } catch (error) {
+      if (!error.response)
+        return res
+          .status(500)
+          .json({ errors: 'Something went wrong, try again later.' });
+
+      return res
+        .status(error.response.status)
+        .json({ errors: error.response.data.error });
+    }
   });
+
+  // Mark: Join room
+  route.post(
+    '/:roomId/join',
+    isAuthenticated,
+    currentUser,
+    async (req, res) => {
+      const { roomId } = req.params;
+      const { userId } = req.user;
+
+      const room = await roomService.getOne({ roomId });
+
+      if (!room)
+        return res.status().json(formatError('roomId', 'Room not found.'));
+
+      if (room.userId == userId || room.members.includes(userId))
+        return res.status(200).json({ data: { joined: true, room } });
+
+      const members = [...room.members, userId];
+
+      const updated = await roomService.updateById(room.id, { members });
+
+      return res.status(203).json({ data: updated });
+    }
+  );
 
   // Mark: - Leave room
   route.post(
-    ':roomId/leave',
+    '/:roomId/leave',
     isAuthenticated,
     currentUser,
     async (req, res) => {
@@ -152,46 +205,89 @@ module.exports = (app) => {
   );
 
   // Mark: - Stop session
-  route.post(':roomId/stop', isAuthenticated, currentUser, async (req, res) => {
-    const { roomId } = req.params;
+  route.post(
+    '/:roomId/stop',
+    isAuthenticated,
+    currentUser,
+    async (req, res) => {
+      const { roomId } = req.params;
+      const { userId } = req.user;
+
+      const room = await roomService.getOne({ roomId });
+
+      if (!room) return res.status(404).json({ errors: 'Room not found.' });
+
+      if (room.userId != userId)
+        //a user who do not own the room should not be let stop the meeting
+        return {
+          own: false,
+          message: 'You are not allowed to perform this operation.',
+        };
+
+      try {
+        await makeRequest(`rooms/${roomId}`, {}, 'DELETE');
+        // TODO: - remove from redis
+        // await JoinedUsers.removeAll(roomId)
+
+        return res.status(200).json({
+          data: {
+            own: true,
+            message: 'The meeting has stopped successfully.',
+          },
+        });
+      } catch (error) {
+        if (!error.response)
+          return res
+            .status(500)
+            .json({ errors: 'Something went wrong, try again later.' });
+
+        return res
+          .status(error.response.status)
+          .json({ errors: error.response.data.error });
+      }
+    }
+  );
+
+  // Mark: - Join meeting session with roomId
+  route.post('/:roomId', isAuthenticated, currentUser, async (req, res) => {
     const { userId } = req.user;
+    const { roomId } = req.params;
+
+    const { name } = await userService.getById(userId);
 
     const room = await roomService.getOne({ roomId });
 
     if (!room) return res.status(404).json({ errors: 'Room not found.' });
 
-    if (room.userId != userId)
-      //a user who do not own the room should not be let stop the meeting
-      return {
-        own: false,
-        message: 'You are not allowed to perform this operation.',
-      };
+    if (!room.members.includes(userId))
+      return res.status(402).json({
+        errors: 'You are not member of this room.',
+      });
 
     try {
-      await makeRequest(`rooms/${roomId}`, {}, 'DELETE');
-      // TODO: - remove from redis
-      // await JoinedUsers.removeAll(roomId)
+      const requestData = {
+        id: roomId,
+        name: room.name,
+        user: { id: userId, name },
+      };
 
-      return res.status(200).json({
-        data: {
-          own: true,
-          message: 'The meeting has stopped successfully.',
-        },
-      });
+      const { data } = await makeRequest('rooms', requestData);
+
+      return res.status(200).json({ data });
     } catch (error) {
       if (!error.response)
-        return res
-          .status(500)
-          .json({ errors: 'Something went wrong, try again later.' });
+        return res.status(500).json({
+          errors: 'Something went wrong, try again later.',
+        });
 
-      return res
-        .status(error.response.status)
-        .json({ errors: error.response.data.error });
+      return res.status(error.response.status).json({
+        errors: error.response.data.error,
+      });
     }
   });
 
   // Mark: - Delete room
-  route.delete('/:id', isAuthenticated, currentUser, async (req, res) => {
+  route.delete('/:roomId', isAuthenticated, currentUser, async (req, res) => {
     const { roomId } = req.params;
     const { userId } = req.user;
 

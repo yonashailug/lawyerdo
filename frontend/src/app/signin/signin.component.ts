@@ -38,9 +38,10 @@ export class SigninComponent implements OnInit {
     //TODO: - Validate email: @,.,length,
     //TODO: - Validate password: Accepts only string type
 
-    this.signinService
-      .signin({ email, password })
-      .subscribe((data) => this.getUserFromToken(data));
+    this.signinService.signin({ email, password }).subscribe((data) => {
+      console.log(data);
+      this.getUserFromToken(data);
+    });
   }
 
   setFormData(data: any) {
@@ -58,7 +59,7 @@ export class SigninComponent implements OnInit {
       store.dispatch(addUser(user))
 
       if (token) {
-        this.router.navigateByUrl('signup');
+        this.router.navigate(['dashboard']);
       }
     } catch (err) {
       console.log(err);

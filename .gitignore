@@ -10,7 +10,7 @@ assets/pics/*
 /bazel-out
 
 .env
-backend/access.log
+access.log
 
 # Node
 /node_modules

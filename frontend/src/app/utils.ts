@@ -5,7 +5,7 @@ export const buttonVariants = {
   danger: '#E13C3C',
   warning: '#F89C1C',
   info: '#0fb9b1',
-  secondary: '#F4F5F7'
+  secondary: '#F4F5F7',
 };
 
 export function isValidEmail(value: any) {
