@@ -9,7 +9,8 @@ import { AppInterceptor } from './app.interceptor';
 import { HomeComponent } from './home/home.component';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
-import { SharedModule } from './shared/shared.module'
+import { SharedModule } from './shared/shared.module';
+import { VideoComponent } from './video/video.component'
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { SharedModule } from './shared/shared.module'
     HomeComponent,
     SigninComponent,
     SignupComponent,
+    VideoComponent,
   ],
   imports: [
     BrowserModule,

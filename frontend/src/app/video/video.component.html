@@ -1,0 +1,23 @@
+<div id="loginScreen" class="h-full overflow-hidden">
+  <div class="dropzone">
+    <div class="video-stream-container">
+      <div *ngIf="!stream" class="py-12">Loading...</div>
+      <video
+        *ngIf="stream"
+        id="video"
+        class="video"
+        autoplay
+        ref="video"
+        #videoRef
+      ></video>
+    </div>
+  </div>
+
+  <canvas
+    ref="canvas"
+    v-if="showCanvas"
+    width="120"
+    height="120"
+    style="border-radius: 60px; background: #989c9f;"
+  ></canvas>
+</div>

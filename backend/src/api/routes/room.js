@@ -115,66 +115,8 @@ module.exports = (app) => {
     if (!room)
       throw new NotFoundException(formatError('roomId', 'Room not found.'));
 
-    const rooms = await roomService.getAllPopulated({
-      members: { $in: [userId] },
-    });
-
-    const populatedRooms = await addMembersDetail(rooms.slice());
-
-    return res.status(200).json({
-      data: populatedRooms,
-    });
-  });
-
-  // Mark: - Get members for a room
-  route.get(
-    '/:roomId/members',
-    isAuthenticated,
-    currentUser,
-    async (req, res) => {
-      const { roomId } = req.params;
-
-      const room = await roomService.getOne({ roomId });
-      const membersProfile = [];
-
-      // TODO: - fix me
-      for (let member of room.members) {
-        const memberProfile = await userService.getById(member);
-        if (memberProfile) membersProfile.push(memberProfile);
-      }
-
-      room.membersProfile = membersProfile;
-
-      return res.status(200).json({ data: room });
-    }
-  );
-
-  // Mark: - Get room details by access key
-  route.get('/:access_key', isAuthenticated, currentUser, async (req, res) => {
-    try {
-      const { access_key } = req.params;
-
-      const { data } = await makeRequest(`rooms/${access_key}`, {}, 'GET');
-
-      return res.status(200).json({ data });
-    } catch (error) {
-      if (!error.response)
-        return res.status(500).json({
-          errors: 'Something went wrong, try again later.',
-        });
-
-      return res.status(error.response.status).json({
-        errors: error.response.data.error,
-      });
-    }
-  });
-
-  // Mark: - create new room
-  route.post('', isAuthenticated, currentUser, async (req, res) => {
-    const { name } = req.body;
-    const { userId } = req.user;
-
-    const user = await userService.getById(userId);
+    if (room.userId == userId || room.members.includes(userId))
+      return res.status(200).json({ data: { joined: true, room } });
 
     try {
       const requestData = {
