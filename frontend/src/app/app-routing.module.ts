@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppGuard } from './app.guard';
 
 import { HomeComponent } from './home/home.component';
+import { NewroomComponent } from './newroom/newroom.component';
 import { AuthenticationGuard } from './shared/auth/authentication.guard';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'signin', component: SigninComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'stream/:roomId/:type', component: VideoComponent },
+  { path: 'room/create', component: NewroomComponent },
   // {
   //   path: 'courses',
   //   data: {
