@@ -6,7 +6,7 @@
   <div class="navigation">
       <div class="main-header flex flex-row h-full">
           <!-- <Header onClick={handleLogout} /> -->
-          <ul> <li>{{user.getEmail()}} - {{user.getName()}}</li> </ul>
+          <app-profile [user]="user"></app-profile>
       </div>
   </div>
   <div class="main-panel">
