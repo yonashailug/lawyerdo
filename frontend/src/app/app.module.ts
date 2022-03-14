@@ -12,6 +12,7 @@ import { SignupComponent } from './signup/signup.component';
 import { SharedModule } from './shared/shared.module';
 import { VideoComponent } from './video/video.component';
 import { NewroomComponent } from './newroom/newroom.component';
+import { RoomlistComponent } from './roomlist/roomlist.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { NewroomComponent } from './newroom/newroom.component';
     SignupComponent,
     VideoComponent,
     NewroomComponent,
+    RoomlistComponent,
   ],
   imports: [
     BrowserModule,
