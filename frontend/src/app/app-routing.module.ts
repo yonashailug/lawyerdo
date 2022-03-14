@@ -7,6 +7,7 @@ import { AuthenticationGuard } from './shared/auth/authentication.guard';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
 import { VideoComponent } from './video/video.component';
+import { RoomlistComponent } from './roomlist/roomlist.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'signin', component: SigninComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'stream/:roomId/:type', component: VideoComponent },
+  { path: 'roomlist', component: RoomlistComponent },
   // {
   //   path: 'courses',
   //   data: {
