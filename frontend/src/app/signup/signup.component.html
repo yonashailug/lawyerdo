@@ -20,12 +20,23 @@
         <div class="modal-content">
           <form
             [formGroup]="signupForm"
-            (submit)="handleSubmit()"
+            (ngSubmit)="handleSubmit()"
             class="w-full h-full"
           >
             <div class="modal-body p-4">
               <div class="block">
                 <h4 class="m-auto mb-2 font-bold">Register</h4>
+              </div>
+              <div class="formField">
+                <label class="formFieldLabel" htmlFor="name">Username</label>
+                <div class="relative">
+                  <app-input
+                    (inputOnBlurEvent)="setFormData($event)"
+                    [name]="'name'"
+                  ></app-input>
+                </div>
+                <small name="errorText">{{ checkValid("name") }}</small>
+                <div class="formFieldTip"></div>
               </div>
 
               <div class="formField">
@@ -36,6 +47,7 @@
                     [name]="'email'"
                   ></app-input>
                 </div>
+                <small name="errorText">{{ checkValid("email") }}</small>
                 <div class="formFieldTip"></div>
               </div>
 
@@ -50,20 +62,35 @@
                     [type]="'password'"
                   ></app-input>
                 </div>
+                <small name="errorText">{{ checkValid("password") }}</small>
                 <div class="formFieldTip"></div>
               </div>
             </div>
-          </form>
+            <div class="modal-footer p-4">
+              <div class="text-center">
+                <!-- <app-button [class]="'w-full'" type="submit">Signup</app-button> -->
 
+                <button
+                  type="submit"
+                  [class]="'w-full'"
+                  [disabled]="!signupForm.valid"
+                >
+                  Submit
+                </button>
+                <!-- <app-button class="w-full" type="submit" [disabled]="!signupForm.valid">Login</app-button> -->
+              </div>
+              <!-- <div class="mt-4">
+                  <Button class="w-full mb-4" variant="empty" onClick={() => navigate("/add-buyer")}>Register as Buyer</Button>
+                  <Button class="w-full" variant="empty" onClick={() => navigate("/add-seller")}>Register as Seller</Button>
+                </div> -->
+            </div>
+          </form>
           <div class="modal-footer p-4">
             <div class="text-center">
-              <app-button [class]="'w-full'" type="submit">Signup</app-button>
-              <!-- <app-button class="w-full" type="submit" [disabled]="!signupForm.valid">Login</app-button> -->
+              <div>
+                <a [routerLink]="['/', 'signin']"> Already have an account? </a>
+              </div>
             </div>
-            <!-- <div class="mt-4">
-                <Button class="w-full mb-4" variant="empty" onClick={() => navigate("/add-buyer")}>Register as Buyer</Button>
-                <Button class="w-full" variant="empty" onClick={() => navigate("/add-seller")}>Register as Seller</Button>
-              </div> -->
           </div>
         </div>
       </div>

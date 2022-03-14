@@ -21,11 +21,11 @@ const routes: Routes = [
   //   loadChildren: () => import('./course/course.module').then(m => m.CourseModule),
   //   canActivate: [AppGuard]
   // },
-  { path: '**', redirectTo : 'home' }
-]
+  { path: '**', redirectTo: 'home' },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
