@@ -1,10 +1,10 @@
-const userModel = require('../../models/user')
+const userService = require('../../services/user')
 
 module.exports = async (req, res, next) => {
 
   try {
 
-    const userRecord = await userModel.findById(req.token._id)
+    const userRecord = await userService.getById(req.token.id)
 
     if (!userRecord)
       return res.status(401).json({

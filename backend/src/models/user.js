@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 
-const User = new mongoose.Schema(
-  {
+const User = new mongoose.Schema({
     name: {
       type: String,
       required: [true, 'Please enter name'],
@@ -19,6 +18,16 @@ const User = new mongoose.Schema(
       unique: true
     },
   },
-  { timestamps: true })
+  {
+    timestamps: true,
+    toJSON: {
+      transform: function(doc, ret, options) {
+        ret.id = ret._id;
+        delete ret._id;
+        delete ret.__v;
+        delete ret.password;
+      },
+    },
+})
 
 module.exports = mongoose.model('User', User)

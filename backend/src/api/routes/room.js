@@ -41,23 +41,48 @@ module.exports = (app) => {
             data: populatedRooms
         })
     })
-    
-    // Mark - Get specific room by roomId
-    route.get('/:roomId', isAuthenticated, currentUser, async(req, res) => {
 
-        const { userId } = req.user
+    // Mark: - Get members for a room
+    route.get('/:roomId/members', isAuthenticated, currentUser, async(req, res) => {
+  
         const { roomId } = req.params
 
         const room = await roomService.getOne({ roomId })
+        const membersProfile = []
 
-        if (!room) return res.status(404).json({ errors: 'Room not found.' })
-    
-        if (room.userId != userId)
-            return res.status(401).json({ errors: 'You are not allowed to perform this operation.' })
+        // TODO: - fix me
+        for (let member of room.members) {
+            const memberProfile = await userService.getById(member)
+            if (memberProfile) membersProfile.push(memberProfile)
+        }
 
-        return res.status(200).json({
-            data: room
-        })
+        room.membersProfile = membersProfile
+
+        return res.status(200).json({ data: room })
+    })
+
+    // Mark: - Get room details by access key
+    route.get('/:access_key', isAuthenticated, currentUser, async(req, res) => {
+
+        try {
+
+            const { access_key } = req.params
+
+            const { data } = await makeRequest(`rooms/${access_key}`, {}, 'GET')
+
+            return res.status(200).json({ data })
+
+        } catch (error) {
+
+            if (!error.response)
+                return res.status(500).json({
+                errors: 'Something went wrong, try again later.',
+                });
+        
+            return res.status(error.response.status).json({
+                errors: error.response.data.error
+            })
+        }
     })
 
     // Mark: - create new room
@@ -102,34 +127,34 @@ module.exports = (app) => {
 
             return res.status(error.response.status).json({ errors: error.response.data.error, })
         }
-   
+    
     })
 
     // Mark: Join room
-    route.post(':roomId/join', isAuthenticated, currentUser, async(req, res) => {
+    route.post('/:roomId/join', isAuthenticated, currentUser, async(req, res) => {
 
         const { roomId } = req.params
         const { userId } = req.user
-  
+    
         const room = await roomService.getOne({ roomId })
 
         if (!room)
-            throw new NotFoundException(formatError('roomId', 'Room not found.'))
+            return res.status().json(formatError('roomId', 'Room not found.'))
     
         if (room.userId == userId || room.members.includes(userId))
             return res.status(200).json({ data: { joined: true, room } })
     
         const members = [...room.members, userId]
 
-        const updated = await roomService.updateById(room._id, { members })
+        const updated = await roomService.updateById(room.id, { members })
 
         return res.status(203).json({ data: updated })
-  
+    
     })
 
     // Mark: - Leave room
-    route.post(':roomId/leave', isAuthenticated, currentUser, async(req, res) => {
-  
+    route.post('/:roomId/leave', isAuthenticated, currentUser, async(req, res) => {
+    
         const { roomId } = req.params
         const { userId } = req.user
 
@@ -150,8 +175,8 @@ module.exports = (app) => {
     })
 
     // Mark: - Stop session
-    route.post(':roomId/stop', isAuthenticated, currentUser, async(req, res) => {
-  
+    route.post('/:roomId/stop', isAuthenticated, currentUser, async(req, res) => {
+    
         const { roomId } = req.params
         const { userId } = req.user
             
@@ -188,8 +213,49 @@ module.exports = (app) => {
         }
     })
 
+    // Mark: - Join meeting session with roomId
+    route.post('/:roomId', isAuthenticated, currentUser, async(req, res) => {
+
+        const { userId } = req.user
+        const { roomId } = req.params
+
+        const { name } = await userService.getById(userId)
+
+        const room = await roomService.getOne({ roomId })
+
+        if (!room) return res.status(404).json({ errors: 'Room not found.' })
+    
+        if (!room.members.includes(userId))
+            return res.status(402).json({
+                errors: 'You are not member of this room.',
+            })
+    
+        try {
+
+            const requestData = {
+                id: roomId,
+                name: room.name,
+                user: { id: userId, name },
+            }
+
+            const { data } = await makeRequest('rooms', requestData)
+
+            return res.status(200).json({ data })
+
+        } catch (error) {
+            if (!error.response)
+                return res.status(500).json({
+                errors: 'Something went wrong, try again later.',
+                });
+        
+            return res.status(error.response.status).json({
+                errors: error.response.data.error
+            })
+        }
+    })
+
     // Mark: - Delete room
-    route.delete('/:id', isAuthenticated, currentUser, async(req, res) => {
+    route.delete('/:roomId', isAuthenticated, currentUser, async(req, res) => {
     
         const { roomId } = req.params
         const { userId } = req.user
