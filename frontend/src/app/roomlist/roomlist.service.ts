@@ -16,4 +16,10 @@ export class RoomListService {
     return this.httpClient
     .get(`${BASE_URL}/rooms`)
   }
+
+  deleteroom(roomId: any): Observable<any> {
+
+    return this.httpClient
+    .delete(`${BASE_URL}/rooms/${roomId}`)
+  }
 }
