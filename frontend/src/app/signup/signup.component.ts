@@ -52,8 +52,7 @@ export class SignupComponent implements OnDestroy, OnInit {
       .subscribe((data) => {
         this.tokenService.saveToken(data.token);
         this.tokenService.saveUser(data.user);
-        console.log(this.tokenService.getUser(), this.tokenService.getToken());
-        this.router.navigate(['home']);
+        this.router.navigate(['signin']);
       });
   }
 

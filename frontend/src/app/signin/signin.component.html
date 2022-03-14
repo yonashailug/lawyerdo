@@ -5,7 +5,7 @@
         <div class="modal-content">
           <form
             [formGroup]="signinForm"
-            (submit)="signin()"
+            (ngSubmit)="signin()"
             class="w-full h-full"
           >
             <div class="modal-body p-4">
@@ -37,14 +37,25 @@
                 <div class="formFieldTip"></div>
               </div>
             </div>
-          </form>
 
+            <div class="modal-footer p-4">
+              <div class="text-center">
+                <!-- <app-button [class]="'w-full'" type="submit">Login</app-button> -->
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  [disabled]="!signinForm.valid"
+                >
+                  Login
+                </button>
+              </div>
+            </div>
+          </form>
           <div class="modal-footer p-4">
             <div class="text-center">
-              <app-button [class]="'w-full'" type="submit">Login</app-button>
-            </div>
-            <div>
-              <a [routerLink]="['/', 'signup']"> Don't have an account? </a>
+              <div>
+                <a [routerLink]="['/', 'signup']"> Don't have an account? </a>
+              </div>
             </div>
           </div>
         </div>

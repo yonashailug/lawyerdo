@@ -414,3 +414,10 @@
 ::1 - - [14/Mar/2022:02:27:06 +0000] "GET /api/rooms/iK9DpnssBbVpPbLbNOkD8HsN HTTP/1.1" 200 2738 "-" "PostmanRuntime/7.29.0"
 ::1 - - [14/Mar/2022:02:27:18 +0000] "POST /api/rooms/622e57bcd81b00000f7dc584/stop HTTP/1.1" 200 71 "-" "PostmanRuntime/7.29.0"
 >>>>>>> 962b0feb366abe055f5ea21510fbac357ebcf673
+::1 - - [14/Mar/2022:03:27:42 +0000] "POST /api/users/login HTTP/1.1" 200 383 "http://localhost:4200/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36"
+::1 - - [14/Mar/2022:03:33:01 +0000] "GET /api/rooms HTTP/1.1" 401 57 "-" "PostmanRuntime/7.29.0"
+::1 - - [14/Mar/2022:03:34:14 +0000] "POST /api/users/login HTTP/1.1" 200 385 "-" "PostmanRuntime/7.29.0"
+::1 - - [14/Mar/2022:03:35:44 +0000] "GET /api/rooms HTTP/1.1" 200 11 "-" "PostmanRuntime/7.29.0"
+::1 - - [14/Mar/2022:03:36:26 +0000] "POST /api/rooms/ HTTP/1.1" 401 57 "-" "PostmanRuntime/7.29.0"
+::1 - - [14/Mar/2022:03:36:44 +0000] "POST /api/rooms/ HTTP/1.1" 200 281 "-" "PostmanRuntime/7.29.0"
+::1 - - [14/Mar/2022:03:36:53 +0000] "GET /api/rooms HTTP/1.1" 200 601 "-" "PostmanRuntime/7.29.0"
