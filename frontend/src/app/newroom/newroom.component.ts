@@ -41,7 +41,7 @@ export class NewroomComponent implements OnInit {
 
     alert('Creating the room: ' + name);
     this.roomService.createRoom({ name }).subscribe((data) => {
-      this.router.navigate(['roomlist']);
+      this.router.navigate(['dashboard']);
     });
   }
 

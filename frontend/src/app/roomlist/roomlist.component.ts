@@ -27,4 +27,16 @@ export class RoomlistComponent implements OnInit {
       console.log(this.rooms);
     });
   }
+
+  deleteRoom(id: any){
+    this.roomlistService.deleteroom(id)
+    .subscribe({
+      next: (res) => {
+        console.log(res);
+        this.router.navigate(['dashboard']);
+      },
+      error: (e) => console.error(e)
+    });
+    console.log(id)
+  }
 }

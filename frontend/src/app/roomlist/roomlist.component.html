@@ -1,19 +1,18 @@
 <div class="flex space-x-2 justify-left">
   <h2 class="text-4xl font-medium leading-tight text-gray-800">Room Lists</h2>
 </div>
-<br />
+<br/>
 <div>
-  <button
-    type="submit"
-    style="
-      background-color: black;
-      color: white;
-      font-weight: bold;
-      border-radius: 5px;
-      padding: 5px;
-    "
-  >
-    <a [routerLink]="['/', 'dashboard', 'room', 'create']"> Create Room </a>
+  <button type="submit" style="
+                  background-color: black;
+                  color: white;
+                  font-weight: bold;
+                  border-radius: 5px;
+                  padding: 5px;
+                ">
+    <a [routerLink]="['/', 'dashboard', 'room', 'create']">
+      Create Room
+    </a>
   </button>
 </div>
 <div class="flex flex-col">
@@ -23,28 +22,16 @@
         <table class="min-w-full">
           <thead class="bg-gray-50 dark:bg-gray-700">
             <tr>
-              <th
-                scope="col"
-                class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
-              >
+              <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
                 Room Name
               </th>
-              <th
-                scope="col"
-                class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
-              >
+              <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
                 Room Desc
               </th>
-              <th
-                scope="col"
-                class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
-              >
+              <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
                 Room owner
               </th>
-              <th
-                scope="col"
-                class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
-              >
+              <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
                 Number of members
               </th>
               <th scope="col" class="relative py-3 px-6">
@@ -54,46 +41,24 @@
           </thead>
           <tbody>
             <ng-container *ngFor="let room of rooms">
-              <tr
-                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-              >
-                <td
-                  class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                >
+              <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
                   {{ room.name }}
                 </td>
-                <td
-                  class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
-                >
+                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
                   {{ room.description }}
                 </td>
-                <td
-                  class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
-                >
+                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
                   {{ room.owner.name }}
                 </td>
-                <td
-                  class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
-                >
+                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
                   {{ room.members.length }}
                 </td>
-                <td
-                  class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap"
-                >
-                  <a
-                    href="#"
-                    class="text-blue-600 dark:text-blue-500 hover:underline"
-                    >Join</a
-                  >
+                <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
+                  <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">Join</a>
                 </td>
-                <td
-                  class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap"
-                >
-                  <a
-                    href="#"
-                    class="text-blue-600 dark:text-blue-500 hover:underline"
-                    >Delete</a
-                  >
+                <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
+                  <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline" (click)="deleteRoom(room.roomId)">Delete</a>
                 </td>
               </tr>
             </ng-container>
