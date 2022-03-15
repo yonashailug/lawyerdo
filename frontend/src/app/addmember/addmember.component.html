@@ -1,0 +1,21 @@
+<form
+  [formGroup]="memberForm"
+  (ngSubmit)="handleSubmit()"
+  class="w-full h-full"
+>
+  <div class="flex justify-end">
+    <div class="block rounded-lg shadow-lg bg-white max-w-sm p-4">
+      <div class="formField">
+        <label class="formFieldLabel" htmlFor="member">Member email</label>
+        <div class="relative">
+          <app-input
+            (inputOnBlurEvent)="setFormData($event)"
+            [name]="'member'"
+          ></app-input>
+        </div>
+        <small name="errorText">{{ checkValid("member") }}</small>
+      </div>
+      <app-button class="flex" type="submit">Add</app-button>
+    </div>
+  </div>
+</form>
