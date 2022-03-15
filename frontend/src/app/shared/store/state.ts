@@ -3,5 +3,6 @@ import { Room } from '../model/room'
 
 export interface AppState {
   user: User,
-  room: Room
+  room: Room,
+  rooms: Room[]
 }

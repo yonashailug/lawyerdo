@@ -72,43 +72,42 @@
                       class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-gray-400"
                     >
                       <a
-                        class="text-blue-600 dark:text-blue-500 hover:underline"
-                        (click)="roomDetail(room.roomId)"
+                        class="cursor-pointer text-blue-600 dark:text-blue-500 hover:underline"
+                        (click)="roomDetail(room.getRoomId())"
                       >
-                        {{ room.name }}
+                        {{ room.getName() }}
                       </a>
                     </td>
                     <td
                       class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
                     >
-                      {{ room.description }}
+                      {{ room.getDescription() }}
                     </td>
                     <td
                       class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
                     >
-                      {{ room.owner.name }}
+                      {{ room.getOwner().getName() }}
                     </td>
                     <td
                       class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
                     >
-                      {{ room.members.length }}
+                      {{ room.getMembers().length }}
                     </td>
                     <td
                       class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap"
                     >
                       <a
-                        href="#"
-                        class="text-blue-600 dark:text-blue-500 hover:underline"
-                        >Join</a
+                        (click)="roomDetail(room.getRoomId())"
+                        class="cursor-pointer text-blue-600 dark:text-blue-500 hover:underline"
+                        >View</a
                       >
                     </td>
                     <td
                       class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap"
                     >
                       <a
-                        href="#"
-                        class="text-blue-600 dark:text-blue-500 hover:underline"
-                        (click)="deleteRoom(room.roomId)"
+                        class="text-blue-600 dark:text-blue-500 hover:underline cursor-pointer"
+                        (click)="deleteRoom(room.getRoomId())"
                         >Delete</a
                       >
                     </td>

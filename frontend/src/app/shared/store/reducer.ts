@@ -5,7 +5,12 @@ import { AppState } from './state';
 const intialState: AppState = {
   user: User.EMPTY_USER,
   room: Room.EMPTY_ROOM,
+  rooms: []
 };
+
+const removeRoom = (state: AppState, id: string): Room[] => {
+  return state.rooms.filter(room => room.getRoomId() !== id)
+}
 
 export function reducer(
   state: AppState = intialState,
@@ -27,6 +32,16 @@ export function reducer(
         ...state,
         user: User.EMPTY_USER,
       };
+    case 'REMOVE_ROOM':
+      return {
+        ...state,
+        rooms: removeRoom(state, action.payload)
+      }
+    case 'SET_ROOMS':
+      return {
+        ...state,
+        rooms: action.payload
+      }
     default:
       return state;
   }

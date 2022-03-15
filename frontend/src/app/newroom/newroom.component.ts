@@ -40,22 +40,10 @@ export class NewroomComponent implements OnInit {
 
   handleSubmit() {
     const name: string = this.newRoomForm.get('name')!.value;
+    if (!this.newRoomForm.valid) return
     this.roomService.createRoom({ name }).subscribe((data) => {
       this.router.navigate(['dashboard']);
     });
-  }
-
-  getUserFromToken(data: { token: string; user: Object }): void {
-    try {
-      const token = data.token;
-      this.tokenService.saveToken(token);
-      this.userService.saveUser(data.user);
-      if (token) {
-        this.router.navigate(['dashboard']);
-      }
-    } catch (err) {
-      console.log(err);
-    }
   }
 
   setFormData(data: any) {

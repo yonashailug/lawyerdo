@@ -21,3 +21,18 @@ export function logoutUser() {
     payload: null,
   };
 }
+
+export function removeRoom(id: string) {
+  return {
+    type: 'REMOVE_ROOM',
+    payload: id
+  }
+}
+
+export function addRooms(rooms: Room[]) {
+  console.log(rooms)
+  return {
+    type: 'SET_ROOMS',
+    payload: rooms
+  }
+}

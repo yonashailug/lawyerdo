@@ -73,12 +73,6 @@ export class VideoComponent implements OnInit, OnDestroy {
       action: 'handleStopMeeting',
       handled: false,
     },
-    // {
-    //   icon: 'expand',
-    //   title: 'Full screen',
-    //   action: 'toggleFullscreen',
-    //   handled: false
-    // },
   ];
 
   @ViewChild('videoRef') videoRef: any = null;
@@ -108,7 +102,6 @@ export class VideoComponent implements OnInit, OnDestroy {
     } else {
       this.startRoom();
     }
-    // this.stream = { name: 'hh' }
   }
 
   handleControls(action: Exclude<keyof VideoComponent, 'handleControls'>) {
@@ -129,15 +122,11 @@ export class VideoComponent implements OnInit, OnDestroy {
 
   async checkIfJoined(access_key: string) {
     return new Promise((resolve) => {
-      this.videoService.get(`rooms/${access_key}`).subscribe(
-        (data: any) => {
-          resolve(data);
-        },
-        (error) => {
-          resolve(null);
-        }
-      );
-    });
+      this.videoService.get(`rooms/${access_key}`).subscribe({
+        next: (data) => { resolve(data); },
+        error: (error) => { resolve(null); }
+      });
+    })
   }
 
   async startRoom() {
@@ -173,22 +162,6 @@ export class VideoComponent implements OnInit, OnDestroy {
 
     eyeson.start(this.accessKey);
     eyeson.onEvent(this.handleEvent.bind(this));
-
-    // ModalBus.$on('toggleAudio', ({ action }) => {
-    //   if (action === 'toggleAudio') {
-    //     this.toggleAudio();
-    //   } else if (action === 'toggleVideo') {
-    //     this.toggleVideo();
-    //   } else if (action === 'toggleScreen') {
-    //     this.toggleScreen();
-    //   } else if (action === 'toggleFullscreen') {
-    //     this.toggleFullscreen();
-    //   } else if (action === 'handleLayoutChange') {
-    //     this.handleLayoutChange();
-    //   } else if (action === 'toggleRecord') {
-    //     this.toggleRecord();
-    //   }
-    // })
   }
 
   async handleStopMeeting() {
@@ -226,10 +199,6 @@ export class VideoComponent implements OnInit, OnDestroy {
     } else {
       StreamHelpers.disableAudio(this.local);
     }
-    // eventBus.$emit('toggleAction', {
-    //   action: 'toggleAudio',
-    //   handled: !audioEnabled
-    // });
     this.audio = audioEnabled;
   }
 
@@ -241,11 +210,6 @@ export class VideoComponent implements OnInit, OnDestroy {
       audio: this.audio,
     });
     this.video = !this.video;
-
-    // eventBus.$emit('toggleAction', {
-    //   action: 'toggleVideo',
-    //   handled: !this.video
-    // });
   }
 
   toggleScreen() {
@@ -265,10 +229,6 @@ export class VideoComponent implements OnInit, OnDestroy {
       eyeson.send({ type: 'stop_presenting' });
       this.screen = false;
     }
-    // eventBus.$emit('toggleAction', {
-    //   action: 'toggleScreen',
-    //   handled: this.screen
-    // });
   }
 
   toggleFullscreen() {
@@ -285,11 +245,6 @@ export class VideoComponent implements OnInit, OnDestroy {
       });
 
       this.screen = false;
-      // eventBus.$emit('toggleAction', {
-      //   action: 'toggleScreen',
-      //   handled: this.screen
-      // });
-
       return;
     }
 

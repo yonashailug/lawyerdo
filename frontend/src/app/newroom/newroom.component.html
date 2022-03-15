@@ -28,14 +28,14 @@
 
             <div class="modal-footer p-4">
               <div class="text-center">
-                <!-- <app-button [class]="'w-full'" type="submit">Login</app-button> -->
-                <button
+                <app-button (onBtnClick)="handleSubmit()">Create</app-button>
+                <!-- <button
                   type="submit"
                   class="btn btn-primary"
                   [disabled]="!newRoomForm.valid"
                 >
                   Create
-                </button>
+                </button> -->
               </div>
             </div>
           </form>

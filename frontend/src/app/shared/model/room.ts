@@ -8,20 +8,22 @@ export class Room {
     private roomId: string = ''
     private name: string = ''
     private description: string = ''
-    private userId: User = User.EMPTY_USER
+    private owner: User = User.EMPTY_USER
     private members: Array<string> = []
     private photo: string = ''
     private access_key: string = ''
+    private membersProfile: Array<User> = []
 
 
     getId(): string { return this.id }
     getRoomId(): string { return this.roomId }
     getName(): string { return this.name }
     getDescription(): string { return this.description }
-    getUserId(): User { return this.userId }
+    getOwner(): User { return this.owner }
     getMembers(): Array<string> { return this.members }
     getPhoto(): string { return this.photo }
     getAccessKey(): string { return this.access_key }
+    getMembersProfile(): Array<User> { return this.membersProfile }
 
     setAccessKey(accessKey: string) { this.access_key = accessKey }
 

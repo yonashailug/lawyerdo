@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Room } from '../shared/model/room';
+import { User } from '../shared/model/user';
 import { TokenService } from '../shared/services/token.service';
+import { addRooms, removeRoom } from '../shared/store/actions';
+import { store } from '../shared/store/store';
 import { RoomListService } from './roomlist.service';
 
 @Component({
@@ -10,30 +13,41 @@ import { RoomListService } from './roomlist.service';
   styles: [``],
 })
 export class RoomlistComponent implements OnInit {
-  rooms: any[] = [];
-  roomDetails: any[] = [];
+  rooms: Room[] = [];
+  roomDetails: Room = Room.EMPTY_ROOM;
   hideDiv = false;
   constructor(
     private router: Router,
-    private tokenService: TokenService,
     private roomlistService: RoomListService
-  ) {}
+  ) {
+    // this.rooms = store.getState().rooms
+    store.subscribe(() => {
+      this.rooms = store.getState().rooms
+    })
+  }
 
   ngOnInit(): void {
     this.roomlist();
   }
 
   roomlist() {
-    this.roomlistService.roomlist().subscribe((data) => {
-      this.rooms = data.data;
+    this.roomlistService.roomlist()
+    .subscribe((data) => {
+      store.dispatch(addRooms(data.data.map((room: any) => {
+        room.owner = User.fromObject(room.owner)
+        room.membersProfile = room.membersProfile
+        .map((member: any) => User.fromObject(member))
+        return Room.fromObject(room)
+      })))
     });
   }
 
   deleteRoom(id: any) {
     this.roomlistService.deleteroom(id).subscribe({
       next: (res) => {
-        console.log(res);
-        this.router.navigate(['dashboard']);
+        // console.log(res);
+        // this.router.navigate(['dashboard']);
+        store.dispatch(removeRoom(id))
       },
       error: (e) => console.error(e),
     });
@@ -42,7 +56,7 @@ export class RoomlistComponent implements OnInit {
 
   roomDetail(id: any) {
     for (var room of this.rooms) {
-      if (room.roomId == id) {
+      if (room.getId() == id) {
         this.roomDetails = room;
         this.hideDiv = true;
       }

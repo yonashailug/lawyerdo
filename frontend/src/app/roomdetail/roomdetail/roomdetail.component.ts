@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { Room } from 'src/app/shared/model/room';
 
 @Component({
   selector: 'app-roomdetail',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class RoomdetailComponent implements OnInit {
   hideDiv = true;
-  @Input() roomDetails!: any;
+  @Input() roomDetails: Room = Room.EMPTY_ROOM;
   room: any;
   constructor(private router: Router) {}
 
@@ -17,7 +18,7 @@ export class RoomdetailComponent implements OnInit {
   }
 
   handleNavigate() {
-    this.router.navigateByUrl(`/stream/${this.roomDetails.roomId}/start`);
+    this.router.navigateByUrl(`/stream/${this.roomDetails.getId()}/start`);
   }
 
   addMember() {
