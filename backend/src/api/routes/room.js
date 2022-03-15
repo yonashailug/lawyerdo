@@ -42,17 +42,14 @@ module.exports = (app) => {
 
   // Mark - Get specific room by access_key
   route.get('/:access_key', isAuthenticated, currentUser, async (req, res) => {
-    
     try {
-
-      const { access_key } = req.params
+      const { access_key } = req.params;
 
       const { data } = await makeRequest(`rooms/${access_key}`, {}, 'GET');
 
       return res.status(200).json({
-        data
-      })
-
+        data,
+      });
     } catch (error) {
       if (!error.response)
         return res.status(500).json({
@@ -115,17 +112,20 @@ module.exports = (app) => {
     currentUser,
     async (req, res) => {
       const { roomId } = req.params;
-      const { userId } = req.user;
+      const { email } = req.body;
+
+      const user = await userService.getOne({ email: email });
+      const { _id } = user;
 
       const room = await roomService.getOne({ roomId });
 
       if (!room)
         return res.status().json(formatError('roomId', 'Room not found.'));
 
-      if (room.userId == userId || room.members.includes(userId))
+      if (room.userId == _id || room.members.includes(_id))
         return res.status(200).json({ data: { joined: true, room } });
 
-      const members = [...room.members, userId];
+      const members = [...room.members, _id];
 
       const updated = await roomService.updateById(room.id, { members });
 

@@ -7,15 +7,21 @@ import { Router } from '@angular/router';
   styles: [],
 })
 export class RoomdetailComponent implements OnInit {
-  constructor(private router: Router) {
-    console.log(this.roomDetails)
+  hideDiv = true;
+  @Input() roomDetails!: any;
+  room: any;
+  constructor(private router: Router) {}
+
+  ngOnInit(): void {
+    console.log(this.roomDetails);
   }
 
-  ngOnInit(): void {}
-
-  @Input() roomDetails!: any;
-
   handleNavigate() {
-    this.router.navigateByUrl(`/stream/${this.roomDetails.roomId}/start`)
+    this.router.navigateByUrl(`/stream/${this.roomDetails.roomId}/start`);
+  }
+
+  addMember() {
+    this.room = this.roomDetails;
+    this.hideDiv = false;
   }
 }

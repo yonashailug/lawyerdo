@@ -17,6 +17,7 @@ import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 import { RoomdetailComponent } from './roomdetail/roomdetail/roomdetail.component';
 import { ProfileComponent } from './profile/profile.component';
 import { NavbarComponent } from './navbar/navbar/navbar.component';
+import { AddmemberComponent } from './addmember/addmember.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { NavbarComponent } from './navbar/navbar/navbar.component';
     RoomdetailComponent,
     ProfileComponent,
     NavbarComponent,
+    AddmemberComponent,
   ],
   imports: [
     BrowserModule,
