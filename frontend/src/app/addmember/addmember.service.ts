@@ -29,10 +29,4 @@ export class AddmemberService {
         )
       );
   }
-
-  checkEmail(email: string): Observable<{ [key: string]: boolean } | null> {
-    return this.httpClient
-      .get(`${BASE_URL}/users/verify?email=${email}`)
-      .pipe(map(({ data }: any) => (data.exists ? data : null)));
-  }
 }

@@ -13,7 +13,7 @@ export class RoomdetailComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    console.log(this.roomDetails);
+    // console.log(this.roomDetails);
   }
 
   handleNavigate() {

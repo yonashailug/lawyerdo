@@ -17,11 +17,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
   @Input() user: User = User.EMPTY_USER;
   subscription: any = {};
   // sub: Subscription | undefined;
-  isOpen: boolean = false
+  isOpen: boolean = false;
 
-  constructor(private tokenService: TokenService,
+  constructor(
+    private tokenService: TokenService,
     private userService: UserService,
-     private router: Router) {
+    private router: Router
+  ) {
     this.user = store.getState().user;
     this.subscription = store.subscribe(() => {
       this.user = store.getState().user;
@@ -30,9 +32,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   logout() {
     store.dispatch(logoutUser());
-    this.tokenService.removeToken()
-    this.userService.removeUser()
-    this.tokenService.removeAccessKey()
+    this.tokenService.removeToken();
+    this.userService.removeUser();
+    this.tokenService.removeAccessKey();
     this.router.navigate(['signin']);
   }
 
@@ -46,16 +48,16 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   goto() {
-    this.router.navigateByUrl('profile') // TODO: - profile page if exists
+    this.router.navigateByUrl('profile'); // TODO: - profile page if exists
   }
 
   isLoggedIn() {
     let len = 0;
     for (let key in this.user) {
       if (['', null, undefined].includes((this.user as any)[key])) {
-        len++
+        len++;
       }
     }
-    return Object.keys(this.user).length !== len
+    return Object.keys(this.user).length !== len;
   }
 }
