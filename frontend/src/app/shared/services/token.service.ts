@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
-import { TOKEN_KEY, REFRESH_TOKEN_KEY, USER_KEY } from './../../config'
+import { TOKEN_KEY, REFRESH_TOKEN_KEY, ACCESS_KEY } from './../../config'
 
 @Injectable({
   providedIn: 'root'
@@ -29,15 +29,15 @@ export class TokenService {
     this.appStorage.removeItem(REFRESH_TOKEN_KEY)
   }
 
-  getUser(): Object {
-    return this.appStorage.getItem(USER_KEY)
+  getAccessKey() {
+    return this.appStorage.getItem(ACCESS_KEY)
   }
 
-  saveUser(user: Object) {
-    this.appStorage.setItem(USER_KEY, user)
+  removeAccessKey() {
+    this.appStorage.removeItem(ACCESS_KEY)
   }
 
-  removeUser() {
-    this.appStorage.removeItem(USER_KEY)
+  saveAccessKey(accessKey: string) {
+    this.appStorage.setItem(ACCESS_KEY, accessKey)
   }
 }

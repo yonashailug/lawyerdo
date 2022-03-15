@@ -79,13 +79,10 @@
   "emmet.showSuggestionsAsSnippets": true,
   "emmet.triggerExpansionOnTab": false,
   "errorLens.enabledDiagnosticLevels": [
-    "warning",
-    "error"
+    "warning", "error"
   ],
   "errorLens.excludeBySource": [
-    "cSpell",
-    "Grammarly",
-    "eslint"
+    "cSpell", "Grammarly", "eslint"
   ],
   // ESLint config: https://github.com/antfu/eslint-config
   "eslint.codeAction.showDocumentation": {
@@ -220,4 +217,7 @@
     "remix.config.*": "*.env, .babelrc*, .codecov, .cssnanorc*, .env.*, .htmlnanorc*, .mocha*, .postcssrc*, .terserrc*, api-extractor.json, ava.config.*, babel.config.*, cssnano.config.*, cypress.json, env.d.ts, htmlnanorc.*, jasmine.*, jest.config.*, jsconfig.*, karma*, playwright.config.*, postcss.config.*, puppeteer.config.*, remix.*, svgo.config.*, tailwind.config.*, tsconfig.*, tsdoc.*, unocss.config.*, vitest.config.*, webpack.config.*, windi.config.*"
   },
   "editor.fontSize": 15,
+  "editor.defaultFormatter": "mblode.pretty-formatter",
+  "editor.formatOnSave": true,
+  "workbench.editor.labelFormat": "medium"
 }

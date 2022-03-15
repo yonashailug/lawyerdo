@@ -1,14 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InputComponent } from './components/input.component';
+import { ButtonComponent } from './components/button.component';
+import { ColorizeDirective } from './directive/colorize.directive';
+import { ModalsComponent } from './components/modals.component';
 
 @NgModule({
   declarations: [
-    InputComponent
+    InputComponent,
+    ButtonComponent,
+    ColorizeDirective,
+    ModalsComponent
   ],
   imports: [
     CommonModule
   ],
-  providers: []
+  providers: [],
+  exports: [
+    InputComponent,
+    ButtonComponent
+  ]
 })
 export class SharedModule { }

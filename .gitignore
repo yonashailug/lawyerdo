@@ -9,6 +9,9 @@ assets/pics/*
 /out-tsc
 /bazel-out
 
+.env
+access.log
+
 # Node
 /node_modules
 npm-debug.log

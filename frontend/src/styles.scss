@@ -3,6 +3,20 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --bg-variant: #133b45;
+}
+
+body {
+  height: 100%;
+  background: #e2e8f0;
+  max-width: 100vw;
+  max-height: 100vh;
+}
+
+#loginScreen {
+  background: #e2e8f0;
+}
 
 .flex {
   display: flex;

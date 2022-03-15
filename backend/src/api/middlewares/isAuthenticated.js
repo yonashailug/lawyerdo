@@ -4,7 +4,6 @@ const config = require('../../config')
 
 const getTokenFromHeader = req => {
 
-  console.log(config.jwtAlgorithm)
   if (
     (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Token') ||
     (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer')

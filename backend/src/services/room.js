@@ -1,8 +1,12 @@
 const roomModel = require('../models/room')
 
 module.exports = {
-    allRooms: () => roomModel.find(),
-    addRoom: (data) => roomModel.create(data),
-    getRoomById: (id) => roomModel.findById(id),
-    deleteRoomById: (id) => roomModel.deleteOne({ _id: id })
+    getAll: () => roomModel.find(),
+    create: (data) => roomModel.create(data),
+    getById: (id) => roomModel.findById(id),
+    deleteById: (id) => roomModel.deleteOne({ _id: id }),
+    deleteOne: ({ roomId }) => roomModel.deleteOne({ roomId }),
+    getOne: ({ roomId }) => roomModel.findOne({ roomId }),
+    updateById: (id, data) => roomModel.updateOne({ _id: id }, { ...data }),
+    getAllPopulated: (filter) => roomModel.find(filter).populate('userId', '-password')
 }

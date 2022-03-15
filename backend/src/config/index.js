@@ -17,4 +17,6 @@ module.exports = {
     databaseURL: process.env.MONGODB_URI,
     jwt: process.env.JWT_SECRET,
     jwtAlgorithm: process.env.JWT_ALGORITHM,
+    eyesonApiKey: process.env.API_KEY,
+    eyesonApiUrl: process.env.EY_URL,
 }

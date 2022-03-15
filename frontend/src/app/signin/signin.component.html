@@ -1,6 +1,69 @@
+<div class="w-full">
+  <div class="w-full flex flex-row h-full">
+    <div class="w-full flex justify-center">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form
+            [formGroup]="signinForm"
+            (ngSubmit)="signin()"
+            class="w-full h-full"
+          >
+            <div class="modal-body p-4">
+              <div class="block">
+                <h4 class="m-auto mb-2 font-bold">Login</h4>
+              </div>
+              <div class="formField">
+                <label class="formFieldLabel" htmlFor="email">Email</label>
+                <div class="relative">
+                  <app-input
+                    (inputOnBlurEvent)="setFormData($event)"
+                    [name]="'email'"
+                  ></app-input>
+                </div>
+                <div class="formFieldTip"></div>
+              </div>
 
-<form [formGroup]="signinForm" (submit)="signin()">
-  <input name="email"  formControlName="email" />
-  <input type="password" name="password" formControlName="password" />
-  <button type="submit" [disabled]="!signinForm.valid">Login</button>
-</form>
+              <div class="formField">
+                <label class="formFieldLabel" htmlFor="password"
+                  >Password</label
+                >
+                <div class="relative">
+                  <app-input
+                    (inputOnBlurEvent)="setFormData($event)"
+                    [name]="'password'"
+                    [type]="'password'"
+                  ></app-input>
+                </div>
+                <div class="formFieldTip"></div>
+              </div>
+            </div>
+
+            <div class="modal-footer p-4">
+              <div class="text-center">
+                <app-button (onBtnClick)="signin()">Login</app-button>
+                <!-- <button
+                  type="submit"
+                  class="btn btn-primary"
+                  [disabled]="!signinForm.valid"
+                >
+                  Login
+                </button> -->
+              </div>
+            </div>
+          </form>
+          <div class="modal-footer p-4">
+            <!-- <div class="text-center"> -->
+            <!-- <button (click)="signin()">Login</button> -->
+            <!-- <app-button [class]="'w-full'" type="submit">Login</app-button> -->
+            <!-- </div> -->
+            <div class="w-full flex justify-center">
+              <div>
+                <a [routerLink]="['/', 'signup']"> Don't have an account? </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

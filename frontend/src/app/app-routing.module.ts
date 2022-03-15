@@ -3,16 +3,31 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppGuard } from './app.guard';
 
 import { HomeComponent } from './home/home.component';
+import { NewroomComponent } from './newroom/newroom.component';
 import { AuthenticationGuard } from './shared/auth/authentication.guard';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
+import { VideoComponent } from './video/video.component';
+import { RoomlistComponent } from './roomlist/roomlist.component';
+import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, canActivate: [AppGuard] },
   // { path: 'protected', component: ProtectedComponent, canActivate: [AuthenticationGuard] },
-  { path: 'signin', component: SigninComponent },
-  { path: 'signup', component: SignupComponent },
+  {
+    path: 'signin',
+    component: SigninComponent,
+    // canActivate: [AuthenticationGuard],
+  },
+  {
+    path: 'signup',
+    component: SignupComponent,
+    // canActivate: [AuthenticationGuard],
+  },
+  { path: 'stream/:roomId/:type', component: VideoComponent },
+  { path: 'room/create', component: NewroomComponent },
+  { path: 'dashboard', component: DashboardComponent },
   // {
   //   path: 'courses',
   //   data: {
@@ -21,11 +36,11 @@ const routes: Routes = [
   //   loadChildren: () => import('./course/course.module').then(m => m.CourseModule),
   //   canActivate: [AppGuard]
   // },
-  { path: '**', redirectTo : 'home' }
-]
+  { path: '**', redirectTo: 'home' },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
