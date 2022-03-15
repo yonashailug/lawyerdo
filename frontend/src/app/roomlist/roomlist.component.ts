@@ -56,7 +56,7 @@ export class RoomlistComponent implements OnInit {
 
   roomDetail(id: any) {
     for (var room of this.rooms) {
-      if (room.getId() == id) {
+      if (room.getRoomId() == id) {
         this.roomDetails = room;
         this.hideDiv = true;
       }
