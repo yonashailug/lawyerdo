@@ -1,70 +1,77 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import eyeson, { StreamHelpers } from 'eyeson';
 
-import { StorageService } from '../shared/services/storage.service'
+import { StorageService } from '../shared/services/storage.service';
 import { VideoService } from './video.service';
-import { store } from '../shared/store/store'
+import { store } from '../shared/store/store';
 import { updateRoom } from '../shared/store/actions';
 import { Room } from '../shared/model/room';
 import { User } from '../shared/model/user';
 
 declare global {
-  interface Window { stream: any; }
+  interface Window {
+    stream: any;
+  }
 }
 
 @Component({
   selector: 'app-video',
   templateUrl: './video.component.html',
   styleUrls: ['./video.component.scss'],
-  providers: [VideoService]
+  providers: [VideoService],
 })
 export class VideoComponent implements OnInit, OnDestroy {
-
-  accessKey: string = ''
-  roomId: string = ''
-  videoSrc: any
-  screen: boolean = false
-  local: any = {}
-  stream: any = null
-  audio: boolean = true
-  video: boolean = true
-  type: string = ''
-  showCanvas: boolean = false
-  room: Room = Room.EMPTY_ROOM
-  user: User = User.EMPTY_USER
+  accessKey: string = '';
+  roomId: string = '';
+  videoSrc: any;
+  screen: boolean = false;
+  local: any = {};
+  stream: any = null;
+  audio: boolean = true;
+  video: boolean = true;
+  type: string = '';
+  showCanvas: boolean = false;
+  room: Room = Room.EMPTY_ROOM;
+  user: User = User.EMPTY_USER;
   controls: any = [
     {
       icon: 'microphone',
       toggleIcon: 'microphone-slash',
       title: 'Mic',
       action: 'toggleAudio',
-      handled: false
+      handled: false,
     },
     {
       icon: 'video',
       title: 'Video',
       toggleIcon: 'video-slash',
       action: 'toggleVideo',
-      handled: false
+      handled: false,
     },
     {
       icon: 'user-plus',
       title: 'Add user',
       action: 'handleInvite',
-      handled: false
+      handled: false,
     },
     {
       icon: 'times-circle',
       title: 'Leave',
       action: 'handleLeaveRoom',
-      handled: false
+      handled: false,
     },
     {
       icon: 'times-circle',
       title: 'Stop',
       action: 'handleStopMeeting',
-      handled: false
+      handled: false,
     },
     // {
     //   icon: 'expand',
@@ -72,29 +79,29 @@ export class VideoComponent implements OnInit, OnDestroy {
     //   action: 'toggleFullscreen',
     //   handled: false
     // },
-  ]
+  ];
 
   @ViewChild('videoRef') videoRef: any = null;
 
-  constructor(private storageService: StorageService,
-     private activatedRoute: ActivatedRoute,
-     private videoService: VideoService,
-     private router: Router) {
-
-    this.roomId = this.activatedRoute.snapshot.paramMap.get('roomId')!
-    this.type = this.activatedRoute.snapshot.paramMap.get('type')!
+  constructor(
+    private storageService: StorageService,
+    private activatedRoute: ActivatedRoute,
+    private videoService: VideoService,
+    private router: Router
+  ) {
+    this.roomId = this.activatedRoute.snapshot.paramMap.get('roomId')!;
+    this.type = this.activatedRoute.snapshot.paramMap.get('type')!;
     store.subscribe(() => {
-      this.room = store.getState().room
-      this.user = store.getState().user
-    })
+      this.room = store.getState().room;
+      this.user = store.getState().user;
+    });
   }
 
   ngOnDestroy(): void {
-    this.endStream()
+    this.endStream();
   }
 
   ngOnInit(): void {
-
     if (this.type === 'continue') {
       this.endStream();
       this.startStream();
@@ -105,41 +112,39 @@ export class VideoComponent implements OnInit, OnDestroy {
   }
 
   handleControls(action: Exclude<keyof VideoComponent, 'handleControls'>) {
-    this[action]()
+    this[action]();
   }
 
   joinMeeting(): Promise<boolean> {
-
     return new Promise((resolve) => {
-      this.videoService.post(`rooms/${this.roomId}`, {})
-      .subscribe(({ data }) => {
-
-        store.dispatch(updateRoom(data.room))
-        this.room.setAccessKey(data.access_key)
-        resolve(data)
-      })
-    })
+      this.videoService
+        .post(`rooms/${this.roomId}`, {})
+        .subscribe(({ data }) => {
+          store.dispatch(updateRoom(data.room));
+          this.room.setAccessKey(data.access_key);
+          resolve(data);
+        });
+    });
   }
 
   async checkIfJoined(access_key: string) {
-
-    return new Promise(resolve => {
-      this.videoService.get(`rooms/${access_key}`)
-      .subscribe((data: any) => {
-        resolve(data)
-      }, error => {
-        resolve(null)
-      })
-    })
+    return new Promise((resolve) => {
+      this.videoService.get(`rooms/${access_key}`).subscribe(
+        (data: any) => {
+          resolve(data);
+        },
+        (error) => {
+          resolve(null);
+        }
+      );
+    });
   }
 
   async startRoom() {
-
     const accessKeys = this.storageService.getItem('access_key') || {};
     let joined = false;
 
     if (accessKeys[this.roomId]) {
-
       const joinedAlready = await this.checkIfJoined(accessKeys[this.roomId]);
       if (joinedAlready) {
         joined = true;
@@ -164,11 +169,10 @@ export class VideoComponent implements OnInit, OnDestroy {
   }
 
   startStream() {
+    this.accessKey = this.storageService.getItem('access_key')[this.roomId];
 
-    this.accessKey = this.storageService.getItem('access_key')[this.roomId]
-
-    eyeson.start(this.accessKey)
-    eyeson.onEvent(this.handleEvent.bind(this))
+    eyeson.start(this.accessKey);
+    eyeson.onEvent(this.handleEvent.bind(this));
 
     // ModalBus.$on('toggleAudio', ({ action }) => {
     //   if (action === 'toggleAudio') {
@@ -185,12 +189,13 @@ export class VideoComponent implements OnInit, OnDestroy {
     //     this.toggleRecord();
     //   }
     // })
-
   }
 
   async handleStopMeeting() {
-    const stopped = await this.videoService
-    .post(`rooms/${this.roomId}/stop`, {})
+    const stopped = await this.videoService.post(
+      `rooms/${this.roomId}/stop`,
+      {}
+    );
 
     if (stopped) {
       this.handleLeaveRoom();
@@ -233,7 +238,7 @@ export class VideoComponent implements OnInit, OnDestroy {
       type: 'change_stream',
       stream: this.local,
       video: !this.video,
-      audio: this.audio
+      audio: this.audio,
     });
     this.video = !this.video;
 
@@ -250,7 +255,7 @@ export class VideoComponent implements OnInit, OnDestroy {
           type: 'start_screen_capture',
           audio: this.audio,
           screenStream: null,
-          screen: true
+          screen: true,
         });
         this.screen = true;
       } catch (err) {
@@ -276,7 +281,7 @@ export class VideoComponent implements OnInit, OnDestroy {
       eyeson.send({
         type: 'start_stream',
         audio: true,
-        video: true
+        video: true,
       });
 
       this.screen = false;
@@ -293,7 +298,7 @@ export class VideoComponent implements OnInit, OnDestroy {
     }
 
     if (event.type === 'exit') {
-      this.handleExit()
+      this.handleExit();
     }
 
     if (event.type !== 'accept') {
@@ -302,16 +307,16 @@ export class VideoComponent implements OnInit, OnDestroy {
     }
 
     if (event.type !== 'stream_update') {
-      this.local = event.localStream
+      this.local = event.localStream;
       this.stream = event.remoteStream;
-      this.videoSrc = this.videoRef.nativeElement
+      this.videoSrc = this.videoRef.nativeElement;
       this.videoSrc.srcObject = event.remoteStream;
       this.videoSrc.play();
     }
   }
 
   isStreamEmpty() {
-    return this.stream === null
+    return this.stream === null;
   }
 
   handleExit() {

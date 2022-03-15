@@ -10,6 +10,7 @@ import { Observable, Subscription } from 'rxjs';
 
 import { User } from '../shared/model/user';
 import { TokenService } from '../shared/services/token.service';
+import { UserService } from '../shared/services/user.service';
 import { SignupService } from './signup.service';
 
 @Component({
@@ -27,7 +28,8 @@ export class SignupComponent implements OnDestroy, OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private signupService: SignupService,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private userService: UserService,
   ) {}
 
   ngOnInit(): void {
@@ -52,7 +54,7 @@ export class SignupComponent implements OnDestroy, OnInit {
       .subscribe({
         next: (data) => {
           this.tokenService.saveToken(data.token);
-          this.tokenService.saveUser(data.user);
+          this.userService.saveUser(data.user);
           this.router.navigate(['signin']);
         },
         error: (res) => {

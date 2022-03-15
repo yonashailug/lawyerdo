@@ -40,14 +40,14 @@
 
             <div class="modal-footer p-4">
               <div class="text-center">
-                <!-- <app-button [class]="'w-full'" type="submit">Login</app-button> -->
-                <button
+                <app-button (onBtnClick)="signin()">Login</app-button>
+                <!-- <button
                   type="submit"
                   class="btn btn-primary"
                   [disabled]="!signinForm.valid"
                 >
                   Login
-                </button>
+                </button> -->
               </div>
             </div>
           </form>
