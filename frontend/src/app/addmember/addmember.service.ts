@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { map } from 'rxjs';
 import { BASE_URL } from '../config';
 
 @Injectable({
@@ -20,12 +20,16 @@ export class AddmemberService {
     return true;
   }
 
-  addMember(email: string, roomId: string) {
+  addMember(data: object, roomId: string) {
     return this.httpClient
-      .post(`${BASE_URL}/rooms/${roomId}/join`, email)
+      .post(`${BASE_URL}/rooms/${roomId}/join`, data)
       .pipe(
         map(({ data }: any) =>
-          data.update === true || data.joined ? data : null
+          data.joined === true ||
+          data.acknowledged === true ||
+          data.modifiedCount === 1
+            ? data
+            : null
         )
       );
   }

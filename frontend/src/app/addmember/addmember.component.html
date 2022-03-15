@@ -15,7 +15,10 @@
         </div>
         <small name="errorText">{{ checkValid("member") }}</small>
       </div>
-      <app-button class="flex" type="submit">Add</app-button>
+      <!-- <app-button class="flex" type="submit">Add</app-button> -->
+      <button class="flex" type="submit" [disabled]="!memberForm?.valid">
+        Add
+      </button>
     </div>
   </div>
 </form>

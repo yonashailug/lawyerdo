@@ -16,6 +16,7 @@ async function addMembersDetail(rooms) {
       const memberProfile = await userService.getById(member);
       if (memberProfile) membersProfile.push(memberProfile);
     }
+
     rooms[i].membersProfile = membersProfile;
   }
 
@@ -113,7 +114,6 @@ module.exports = (app) => {
     async (req, res) => {
       const { roomId } = req.params;
       const { email } = req.body;
-
       const user = await userService.getOne({ email: email });
       const { _id } = user;
 

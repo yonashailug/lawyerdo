@@ -46,9 +46,7 @@ export class AddmemberComponent implements OnInit {
   handleSubmit() {
     const email = this.memberForm.get('member')?.value;
     const roomId = this.room.roomId;
-    this.addmemberService.addMember(email, roomId).subscribe((data) => {
-      console.log(data);
-    });
+    this.addmemberService.addMember({ email }, roomId).subscribe((data) => {});
   }
 
   setFormData(data: any) {
