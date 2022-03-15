@@ -45,7 +45,9 @@
                   <ng-container *ngFor="let room of rooms">
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                       <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {{ room.name }}
+                        <a (click)="roomDetail(room.roomId)">
+                          {{ room.name }}
+                        </a>
                       </td>
                       <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
                         {{ room.description }}
@@ -71,7 +73,7 @@
         </div>
       </div>
     </div>
-    <div class="w-1/2 bg-gray-500 h-12">
-      <app-roomdetail></app-roomdetail>
+    <div class="w-1/2 bg-gray-500 h-12" *ngIf="hideDiv">
+      <app-roomdetail [roomDetails]='roomDetails'></app-roomdetail>
     </div>
   </div>
