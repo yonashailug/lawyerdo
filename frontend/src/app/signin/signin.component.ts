@@ -7,6 +7,7 @@ import { addUser } from '../shared/store/actions';
 import { TokenService } from '../shared/services/token.service';
 import { SigninService } from './signin.service';
 import { User } from '../shared/model/user';
+import { UserService } from '../shared/services/user.service';
 
 @Component({
   selector: 'app-signin',
@@ -21,7 +22,8 @@ export class SigninComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private tokenService: TokenService,
-    private signinService: SigninService
+    private signinService: SigninService,
+    private userService: UserService,
   ) {
     this.signinForm = this.formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
@@ -51,7 +53,7 @@ export class SigninComponent implements OnInit {
     try {
       const token = data.token;
       this.tokenService.saveToken(token);
-      this.tokenService.saveUser(data.user);
+      this.userService.saveUser(data.user);
 
       const user = User.fromObject(data.user);
 

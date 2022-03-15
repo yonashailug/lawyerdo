@@ -1,13 +1,13 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import eyeson, { StreamHelpers } from 'eyeson';
 
-import { StorageService } from '../shared/services/storage.service'
 import { VideoService } from './video.service';
 import { store } from '../shared/store/store'
 import { updateRoom } from '../shared/store/actions';
 import { Room } from '../shared/model/room';
 import { User } from '../shared/model/user';
+import { TokenService } from '../shared/services/token.service';
 
 declare global {
   interface Window { stream: any; }
@@ -66,17 +66,11 @@ export class VideoComponent implements OnInit, OnDestroy {
       action: 'handleStopMeeting',
       handled: false
     },
-    // {
-    //   icon: 'expand',
-    //   title: 'Full screen',
-    //   action: 'toggleFullscreen',
-    //   handled: false
-    // },
   ]
 
   @ViewChild('videoRef') videoRef: any = null;
 
-  constructor(private storageService: StorageService,
+  constructor(private tokenService: TokenService,
      private activatedRoute: ActivatedRoute,
      private videoService: VideoService,
      private router: Router) {
@@ -101,7 +95,6 @@ export class VideoComponent implements OnInit, OnDestroy {
     } else {
       this.startRoom();
     }
-    // this.stream = { name: 'hh' }
   }
 
   handleControls(action: Exclude<keyof VideoComponent, 'handleControls'>) {
@@ -135,7 +128,7 @@ export class VideoComponent implements OnInit, OnDestroy {
 
   async startRoom() {
 
-    const accessKeys = this.storageService.getItem('access_key') || {};
+    const accessKeys = this.tokenService.getAccessKey() || {};
     let joined = false;
 
     if (accessKeys[this.roomId]) {
@@ -153,7 +146,7 @@ export class VideoComponent implements OnInit, OnDestroy {
 
     if (joined) {
       accessKeys[this.roomId] = this.room.getAccessKey();
-      this.storageService.setItem('access_key', accessKeys);
+      this.tokenService.saveAccessKey(accessKeys)
       this.startStream();
     }
   }
@@ -165,27 +158,10 @@ export class VideoComponent implements OnInit, OnDestroy {
 
   startStream() {
 
-    this.accessKey = this.storageService.getItem('access_key')[this.roomId]
+    this.accessKey = this.tokenService.getAccessKey()[this.roomId]
 
     eyeson.start(this.accessKey)
     eyeson.onEvent(this.handleEvent.bind(this))
-
-    // ModalBus.$on('toggleAudio', ({ action }) => {
-    //   if (action === 'toggleAudio') {
-    //     this.toggleAudio();
-    //   } else if (action === 'toggleVideo') {
-    //     this.toggleVideo();
-    //   } else if (action === 'toggleScreen') {
-    //     this.toggleScreen();
-    //   } else if (action === 'toggleFullscreen') {
-    //     this.toggleFullscreen();
-    //   } else if (action === 'handleLayoutChange') {
-    //     this.handleLayoutChange();
-    //   } else if (action === 'toggleRecord') {
-    //     this.toggleRecord();
-    //   }
-    // })
-
   }
 
   async handleStopMeeting() {
@@ -221,10 +197,6 @@ export class VideoComponent implements OnInit, OnDestroy {
     } else {
       StreamHelpers.disableAudio(this.local);
     }
-    // eventBus.$emit('toggleAction', {
-    //   action: 'toggleAudio',
-    //   handled: !audioEnabled
-    // });
     this.audio = audioEnabled;
   }
 
@@ -236,11 +208,6 @@ export class VideoComponent implements OnInit, OnDestroy {
       audio: this.audio
     });
     this.video = !this.video;
-
-    // eventBus.$emit('toggleAction', {
-    //   action: 'toggleVideo',
-    //   handled: !this.video
-    // });
   }
 
   toggleScreen() {
@@ -260,10 +227,6 @@ export class VideoComponent implements OnInit, OnDestroy {
       eyeson.send({ type: 'stop_presenting' });
       this.screen = false;
     }
-    // eventBus.$emit('toggleAction', {
-    //   action: 'toggleScreen',
-    //   handled: this.screen
-    // });
   }
 
   toggleFullscreen() {
@@ -280,11 +243,6 @@ export class VideoComponent implements OnInit, OnDestroy {
       });
 
       this.screen = false;
-      // eventBus.$emit('toggleAction', {
-      //   action: 'toggleScreen',
-      //   handled: this.screen
-      // });
-
       return;
     }
 

@@ -69,14 +69,14 @@
             <div class="modal-footer p-4">
               <div class="text-center">
                 <!-- <app-button [class]="'w-full'" type="submit">Signup</app-button> -->
-
-                <button
+                <app-button (onBtnClick)="handleSubmit()">Signup</app-button>
+                <!-- <button
                   type="submit"
                   [class]="'w-full'"
                   [disabled]="!signupForm.valid"
                 >
                   Submit
-                </button>
+                </button> -->
                 <!-- <app-button class="w-full" type="submit" [disabled]="!signupForm.valid">Login</app-button> -->
               </div>
               <!-- <div class="mt-4">

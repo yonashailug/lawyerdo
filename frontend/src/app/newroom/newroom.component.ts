@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { RoomService } from '../shared/services/room.service';
 import { TokenService } from '../shared/services/token.service';
+import { UserService } from '../shared/services/user.service';
 import { SigninService } from '../signin/signin.service';
 
 @Component({
@@ -25,7 +26,8 @@ export class NewroomComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private tokenService: TokenService,
-    private roomService: RoomService
+    private roomService: RoomService,
+    private userService: UserService,
   ) {
     this.newRoomForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -47,7 +49,7 @@ export class NewroomComponent implements OnInit {
     try {
       const token = data.token;
       this.tokenService.saveToken(token);
-      this.tokenService.saveUser(data.user);
+      this.userService.saveUser(data.user);
       if (token) {
         this.router.navigate(['dashboard']);
       }

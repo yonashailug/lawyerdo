@@ -1,53 +1,43 @@
-<!-- <div class="flex justify-center">
-  <div>
-    <div class="dropdown relative">
-      <button
-        class="dropdown-toggle px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg active:text-white transition duration-150 ease-in-out flex items-center whitespace-nowrap"
-        type="button"
-        id="dropdownMenuButton1d"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
+<div class="flex items-center">
+  <div class="mr-4">
+    <span>{{ user.getName() }}</span>
+  </div>
+  <div class="relative" *ngIf="isLoggedIn()">
+    <button
+      (click)="isOpen = !isOpen"
+      class="relative z-0 block
+    h-8 w-8 rounded-full overflow-hidden border-2
+      border-white-500 focus:outline-none focus:border-white"
+    >
+      <!-- <img class="h-full w-full object-cover" :src="img" alt="Profile image" /> -->
+    </button>
+    <button
+      *ngIf="isOpen"
+      (click)="isOpen = false"
+      tabindex="-1"
+      class="fixed inset-0 h-full
+      z-10
+      w-full bg-transparent opacity-10 cursor-default"
+    ></button>
+    <div
+      *ngIf="isOpen"
+      class="absolute right-0
+      z-50
+    mt-2 py-2 w-48 bg-white rounded-lg shadow-xl"
+    >
+      <!-- <a
+        class="block px-4 py-2 text-textDarkest
+      hover:bg-gray-100"
+        (click)="goto()"
+        >Account settings</a
+      > -->
+      <a
+        class="block px-4 py-2 text-textDarkest
+      hover:bg-gray-100"
         (click)="logout()"
+        >Sign out</a
       >
-        <p>Logout</p>
-      </button>
     </div>
   </div>
-</div> -->
-<div class="relative">
-  <button
-    (click)="isOpen = !isOpen"
-    class="relative z-0 block
-   h-8 w-8 rounded-full overflow-hidden border-2
-    border-white-500 focus:outline-none focus:border-white"
-  >
-    <!-- <img class="h-full w-full object-cover" :src="img" alt="Profile image" /> -->
-  </button>
-  <button
-    *ngIf="isOpen"
-    (click)="isOpen = false"
-    tabindex="-1"
-    class="fixed inset-0 h-full
-    z-10
-    w-full bg-transparent opacity-10 cursor-default"
-  ></button>
-  <div
-    *ngIf="isOpen"
-    class="absolute right-0
-    z-20
-   mt-2 py-2 w-48 bg-white rounded-lg shadow-xl"
-  >
-    <a
-      class="block px-4 py-2 text-textDarkest
-     hover:bg-gray-100"
-      (click)="goto()"
-      >Account settings</a
-    >
-    <a
-      class="block px-4 py-2 text-textDarkest
-     hover:bg-gray-100"
-      (click)="logout()"
-      >Sign out</a
-    >
-  </div>
+  
 </div>
