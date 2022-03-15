@@ -108,56 +108,7 @@ module.exports = (app) => {
     }
   });
 
-  // Mark: Join room
-  route.post(':roomId/join', isAuthenticated, currentUser, async (req, res) => {
-    const { roomId } = req.params;
-    const { userId } = req.user;
-
-    const room = await roomService.getOne({ roomId });
-
-    if (!room)
-      return res.status(404).json(formatError('roomId', 'Room not found.'));
-
-    if (room.userId == userId || room.members.includes(userId))
-      return res.status(200).json({ data: { joined: true, room } });
-
-    try {
-      const requestData = {
-        name,
-        user: {
-          id: userId,
-          name: user.name,
-        },
-      };
-
-      // Mark: - Api request to the eyeson api
-      const { data } = await makeRequest('rooms', requestData);
-
-      const room = {
-        roomId: data.room.id, // Mark: - From eyeson
-        name,
-        userId: userId,
-        members: [userId],
-      };
-
-      const created = await roomService.create(room);
-
-      return res.status(200).json({
-        data: created,
-      });
-    } catch (error) {
-      if (!error.response)
-        return res
-          .status(500)
-          .json({ errors: 'Something went wrong, try again later.' });
-
-      return res
-        .status(error.response.status)
-        .json({ errors: error.response.data.error });
-    }
-  });
-
-  // Mark: Join room
+  // Mark: Join room (add to room members)
   route.post(
     '/:roomId/join',
     isAuthenticated,
