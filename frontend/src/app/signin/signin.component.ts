@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { store } from '../shared/store/store'
-import { addUser } from '../shared/store/actions'
+import { store } from '../shared/store/store';
+import { addUser } from '../shared/store/actions';
 
 import { TokenService } from '../shared/services/token.service';
 import { SigninService } from './signin.service';
@@ -39,7 +39,6 @@ export class SigninComponent implements OnInit {
     //TODO: - Validate password: Accepts only string type
 
     this.signinService.signin({ email, password }).subscribe((data) => {
-      console.log(data);
       this.getUserFromToken(data);
     });
   }
@@ -54,9 +53,9 @@ export class SigninComponent implements OnInit {
       this.tokenService.saveToken(token);
       this.tokenService.saveUser(data.user);
 
-      const user = User.fromObject(data.user)
+      const user = User.fromObject(data.user);
 
-      store.dispatch(addUser(user))
+      store.dispatch(addUser(user));
 
       if (token) {
         this.router.navigate(['dashboard']);

@@ -1,16 +1,23 @@
-import { Room } from '../model/room'
-import { User } from './../model/user'
+import { Room } from '../model/room';
+import { User } from './../model/user';
 
 export function addUser(user: User) {
   return {
     type: 'ADD_USER',
-    payload: user
-  }
+    payload: user,
+  };
 }
 
 export function updateRoom(room: Room) {
   return {
     type: 'UPDATE_ROOM',
-    payload: room
-  }
+    payload: room,
+  };
+}
+
+export function logoutUser() {
+  return {
+    type: 'LOGOUT_USER',
+    payload: null,
+  };
 }

@@ -11,6 +11,8 @@ import { RoomListService } from './roomlist.service';
 })
 export class RoomlistComponent implements OnInit {
   rooms: any[] = [];
+  roomDetails: any[] = [];
+  hideDiv = false;
   constructor(
     private router: Router,
     private tokenService: TokenService,
@@ -24,7 +26,6 @@ export class RoomlistComponent implements OnInit {
   roomlist() {
     this.roomlistService.roomlist().subscribe((data) => {
       this.rooms = data.data;
-      console.log(this.rooms);
     });
   }
 
@@ -37,5 +38,14 @@ export class RoomlistComponent implements OnInit {
       error: (e) => console.error(e),
     });
     console.log(id);
+  }
+
+  roomDetail(id: any) {
+    for (var room of this.rooms) {
+      if (room.roomId == id) {
+        this.roomDetails = room;
+        this.hideDiv = true;
+      }
+    }
   }
 }

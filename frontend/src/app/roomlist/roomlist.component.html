@@ -1,107 +1,120 @@
 <div class="flex mb-4">
-  <div class="w-1/4 bg-gray-500 h-12">
-    <h2 class="text-4xl font-medium leading-tight text-gray-800">Room Lists</h2>
-  </div>
-  <div class="w-1/4 bg-gray-400 h-12"></div>
-  <div class="w-1/4 bg-gray-500 h-12"></div>
-  <div class="w-1/4 bg-gray-400 h-12">
-    <button
-      appColorize
-      type="submit"
-      style="font-weight: bold; border-radius: 5px; padding: 5px"
-    >
-      <a [routerLink]="['/', 'dashboard', 'room', 'create']"> Create Room </a>
-    </button>
-  </div>
-</div>
-
-<br />
-<div></div>
-<div class="flex flex-col">
-  <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-    <div class="inline-block py-2 min-w-full sm:px-6 lg:px-8">
-      <div class="overflow-hidden shadow-md sm:rounded-lg">
-        <table class="min-w-full">
-          <thead class="bg-gray-50 dark:bg-gray-700">
-            <tr>
-              <th
-                scope="col"
-                class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
-              >
-                Room Name
-              </th>
-              <th
-                scope="col"
-                class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
-              >
-                Room Desc
-              </th>
-              <th
-                scope="col"
-                class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
-              >
-                Room owner
-              </th>
-              <th
-                scope="col"
-                class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
-              >
-                Number of members
-              </th>
-              <th scope="col" class="relative py-3 px-6">
-                <span class="sr-only">Actions</span>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <ng-container *ngFor="let room of rooms">
-              <tr
-                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-              >
-                <td
-                  class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                >
-                  {{ room.name }}
-                </td>
-                <td
-                  class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
-                >
-                  {{ room.description }}
-                </td>
-                <td
-                  class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
-                >
-                  {{ room.owner.name }}
-                </td>
-                <td
-                  class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
-                >
-                  {{ room.members.length }}
-                </td>
-                <td
-                  class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap"
-                >
-                  <a
-                    href="#"
-                    class="text-blue-600 dark:text-blue-500 hover:underline"
-                    >Join</a
-                  >
-                </td>
-                <td
-                  class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap"
-                >
-                  <a
-                    href="#"
-                    class="text-blue-600 dark:text-blue-500 hover:underline"
-                    (click)="deleteRoom(room.roomId)"
-                    >Delete</a
-                  >
-                </td>
-              </tr>
-            </ng-container>
-          </tbody>
-        </table>
+  <div class="w-1/2 bg-gray-400 h-12">
+    <div class="flex mb-4">
+      <div class="w-1/4 bg-gray-500 h-12">
+        <h2 class="text-4xl font-medium leading-tight text-gray-800">
+          Room Lists
+        </h2>
+      </div>
+      <div class="w-1/4 bg-gray-400 h-12"></div>
+      <div class="w-1/4 bg-gray-500 h-12"></div>
+      <div class="w-1/4 bg-gray-400 h-12">
+        <button
+          appColorize="appColorize"
+          type="submit"
+          style="font-weight: bold; border-radius: 5px; padding: 5px"
+        >
+          <a [routerLink]="['/', 'dashboard', 'room', 'create']">
+            Create Room
+          </a>
+        </button>
       </div>
     </div>
+
+    <br />
+    <div></div>
+    <div class="flex flex-col">
+      <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="inline-block py-2 min-w-full sm:px-6 lg:px-8">
+          <div class="overflow-hidden shadow-md sm:rounded-lg">
+            <table class="min-w-full">
+              <thead class="bg-gray-50 dark:bg-gray-700">
+                <tr>
+                  <th
+                    scope="col"
+                    class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+                  >
+                    Room Name
+                  </th>
+                  <th
+                    scope="col"
+                    class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+                  >
+                    Room Desc
+                  </th>
+                  <th
+                    scope="col"
+                    class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+                  >
+                    Room owner
+                  </th>
+                  <th
+                    scope="col"
+                    class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+                  >
+                    Number of members
+                  </th>
+                  <th scope="col" class="relative py-3 px-6">
+                    <span class="sr-only">Actions</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let room of rooms">
+                  <tr
+                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                  >
+                    <td
+                      class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-black"
+                    >
+                      <a (click)="roomDetail(room.roomId)">
+                        {{ room.name }}
+                      </a>
+                    </td>
+                    <td
+                      class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
+                    >
+                      {{ room.description }}
+                    </td>
+                    <td
+                      class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
+                    >
+                      {{ room.owner.name }}
+                    </td>
+                    <td
+                      class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
+                    >
+                      {{ room.members.length }}
+                    </td>
+                    <td
+                      class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap"
+                    >
+                      <a
+                        href="#"
+                        class="text-blue-600 dark:text-blue-500 hover:underline"
+                        >Join</a
+                      >
+                    </td>
+                    <td
+                      class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap"
+                    >
+                      <a
+                        href="#"
+                        class="text-blue-600 dark:text-blue-500 hover:underline"
+                        (click)="deleteRoom(room.roomId)"
+                        >Delete</a
+                      >
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="w-1/2 bg-gray-500 h-12" *ngIf="hideDiv">
+    <app-roomdetail [roomDetails]="roomDetails"></app-roomdetail>
   </div>
 </div>

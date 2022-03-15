@@ -26,7 +26,7 @@ const routes: Routes = [
     // canActivate: [AuthenticationGuard],
   },
   { path: 'stream/:roomId/:type', component: VideoComponent },
-  { path: 'dashboard/room/create', component: NewroomComponent },
+  { path: 'room/create', component: NewroomComponent },
   { path: 'dashboard', component: DashboardComponent },
   // {
   //   path: 'courses',

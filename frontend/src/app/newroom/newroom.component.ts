@@ -38,8 +38,6 @@ export class NewroomComponent implements OnInit {
 
   handleSubmit() {
     const name: string = this.newRoomForm.get('name')!.value;
-
-    alert('Creating the room: ' + name);
     this.roomService.createRoom({ name }).subscribe((data) => {
       this.router.navigate(['dashboard']);
     });
