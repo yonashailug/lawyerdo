@@ -26,7 +26,7 @@ export class VideoComponent implements OnInit, OnDestroy {
   videoSrc: any
   screen: boolean = false
   local: any = {}
-  stream: any = {}
+  stream: any = null
   audio: boolean = true
   video: boolean = true
   type: string = ''
@@ -95,12 +95,13 @@ export class VideoComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    // if (this.type === 'continue') {
-    //   this.endStream();
-    //   this.startStream();
-    // } else {
-    //   this.startRoom();
-    // }
+    if (this.type === 'continue') {
+      this.endStream();
+      this.startStream();
+    } else {
+      this.startRoom();
+    }
+    // this.stream = { name: 'hh' }
   }
 
   handleControls(action: Exclude<keyof VideoComponent, 'handleControls'>) {
@@ -307,6 +308,10 @@ export class VideoComponent implements OnInit, OnDestroy {
       this.videoSrc.srcObject = event.remoteStream;
       this.videoSrc.play();
     }
+  }
+
+  isStreamEmpty() {
+    return this.stream === null
   }
 
   handleExit() {

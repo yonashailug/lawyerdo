@@ -1,9 +1,9 @@
 <div id="videoScreen" class="h-full overflow-hidden">
   <div class="dropzone">
     <div class="video-stream-container">
-      <div *ngIf="!stream" class="py-12">Loading...</div>
+      <div *ngIf="isStreamEmpty()" class="py-12">Loading...</div>
       <video
-        *ngIf="stream"
+        *ngIf="!isStreamEmpty()"
         id="video"
         class="video"
         autoplay
@@ -21,7 +21,7 @@
   ></canvas>
 </div>
 
-<div *ngIf="stream" class="controls fixed
+<div *ngIf="!isStreamEmpty()" class="controls fixed
  bg-white shadow-sidebar p-4 rounded-lg
   top-20 flex flex-col
   right-0 mr-4">

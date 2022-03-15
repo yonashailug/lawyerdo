@@ -16,6 +16,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   @Input() user: User = User.EMPTY_USER;
   subscription: any = {};
   // sub: Subscription | undefined;
+  isOpen: boolean = false
 
   constructor(private tokenService: TokenService, private router: Router) {
     this.user = store.getState().user;
@@ -36,5 +37,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription();
+  }
+
+  goto() {
+    this.router.navigateByUrl('profile') // TODO: - profile page if exists
   }
 }

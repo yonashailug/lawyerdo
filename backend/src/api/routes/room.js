@@ -1,4 +1,4 @@
-const { Router } = require('express');
+const { Router, json } = require('express');
 
 const roomService = require('../../services/room');
 const userService = require('../../services/user');
@@ -116,7 +116,7 @@ module.exports = (app) => {
     const room = await roomService.getOne({ roomId });
 
     if (!room)
-      throw new NotFoundException(formatError('roomId', 'Room not found.'));
+      return res.status(404).json(formatError('roomId', 'Room not found.'));
 
     if (room.userId == userId || room.members.includes(userId))
       return res.status(200).json({ data: { joined: true, room } });

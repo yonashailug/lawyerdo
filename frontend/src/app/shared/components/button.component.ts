@@ -1,18 +1,19 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { buttonVariants } from '../../utils';
 
 @Component({
   selector: 'app-button',
   template: `
     <button
+    (click)="handleClick($event)"
       type="button"
       [ngClass]="[variant]"
       class="button inline-flex items-center justify-center h-8 align-middle
     leading-none whitespace-no-wrap rounded-sm transition-all pl-2
       duration-100 appearance-none cursor-pointer select-none px-3"
-      :disabled="disabled"
       [ngStyle]="getButtonStyles()"
       :style="getButtonStyles"
+      
     >
       <div>
         <ng-content></ng-content>
@@ -52,6 +53,8 @@ import { buttonVariants } from '../../utils';
 })
 export class ButtonComponent implements OnInit {
   @Input() variant: string = 'primary';
+  @Output() onBtnClick: EventEmitter<string> = new EventEmitter<string>()
+
   constructor() {}
 
   ngOnInit(): void {}
@@ -64,5 +67,8 @@ export class ButtonComponent implements OnInit {
       // '--bg-variant-light': tuneColor.lighten(color, 0.15),
       '--primary': buttonVariants.primary,
     };
+  }
+  handleClick(e: any) {
+    this.onBtnClick.emit(e.target)
   }
 }
