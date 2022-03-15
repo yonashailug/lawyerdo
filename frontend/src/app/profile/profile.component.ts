@@ -15,13 +15,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
   //user2: any;
   @Input() user: User = User.EMPTY_USER;
   subscription: any = {};
-  sub: Subscription | undefined;
+  // sub: Subscription | undefined;
 
   constructor(private tokenService: TokenService, private router: Router) {
     this.user = store.getState().user;
-    // this.subscription = store.subscribe(() => {
-    //   this.user = store.getState().user;
-    // });
+    this.subscription = store.subscribe(() => {
+      this.user = store.getState().user;
+    });
   }
 
   logout() {
@@ -35,6 +35,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // this.subscription.unsubscribe();
+    this.subscription();
   }
 }
