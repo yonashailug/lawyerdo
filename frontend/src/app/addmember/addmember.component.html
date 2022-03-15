@@ -4,7 +4,7 @@
   class="w-full h-full"
 >
   <div class="flex justify-end">
-    <div class="block rounded-lg shadow-lg bg-white max-w-sm p-4">
+    <div class="block rounded-lg shadow-lg bg-white max-w-sm">
       <div class="formField">
         <label class="formFieldLabel" htmlFor="member">Member email</label>
         <div class="relative">
@@ -16,9 +16,10 @@
         <small name="errorText">{{ checkValid("member") }}</small>
       </div>
       <!-- <app-button class="flex" type="submit">Add</app-button> -->
-      <button class="flex" type="submit" [disabled]="!memberForm?.valid">
+      <!-- <button class="flex" type="submit" [disabled]="!memberForm?.valid">
         Add
-      </button>
+      </button> -->
+      <app-button (onBtnClick)="handleSubmit()">Add</app-button>
     </div>
   </div>
 </form>

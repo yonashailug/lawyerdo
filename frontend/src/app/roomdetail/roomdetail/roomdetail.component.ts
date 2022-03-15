@@ -18,7 +18,7 @@ export class RoomdetailComponent implements OnInit {
   }
 
   handleNavigate() {
-    this.router.navigateByUrl(`/stream/${this.roomDetails.getId()}/start`);
+    this.router.navigateByUrl(`/stream/${this.roomDetails.getRoomId()}/start`);
   }
 
   addMember() {
