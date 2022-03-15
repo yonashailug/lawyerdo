@@ -12,7 +12,7 @@ import { RoomListService } from './roomlist.service';
 export class RoomlistComponent implements OnInit {
   rooms: any[] = [];
   roomDetails: any[] = [];
-  hideDiv=false
+  hideDiv = false;
   constructor(
     private router: Router,
     private tokenService: TokenService,
@@ -40,12 +40,12 @@ export class RoomlistComponent implements OnInit {
     console.log(id);
   }
 
-  roomDetail(id:any){
+  roomDetail(id: any) {
     for (var room of this.rooms) {
-      if(room.roomId==id){
-        this.roomDetails=room
-        this.hideDiv=true
+      if (room.roomId == id) {
+        this.roomDetails = room;
+        this.hideDiv = true;
       }
- }
+    }
   }
 }

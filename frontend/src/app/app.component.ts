@@ -16,12 +16,14 @@ export class AppComponent implements OnInit, OnDestroy {
   subscription: any = {};
 
   constructor(private userService: UserService) {
-    this.subscription = store.subscribe(() => { this.user = store.getState().user })
+    this.subscription = store.subscribe(() => {
+      this.user = store.getState().user;
+    });
   }
 
   ngOnInit(): void {
     if (Object.keys(this.user).length) {
-      store.dispatch(addUser(User.fromObject(this.userService.getUser())))
+      store.dispatch(addUser(User.fromObject(this.userService.getUser())));
     }
   }
 
