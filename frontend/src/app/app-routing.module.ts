@@ -3,12 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppGuard } from './app.guard';
 
 import { HomeComponent } from './home/home.component';
-import { NewroomComponent } from './newroom/newroom.component';
-import { AuthenticationGuard } from './shared/auth/authentication.guard';
+import { NewroomComponent } from './room/newroom/newroom.component';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
 import { VideoComponent } from './video/video.component';
-import { RoomlistComponent } from './roomlist/roomlist.component';
 import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 
 const routes: Routes = [
@@ -25,8 +23,14 @@ const routes: Routes = [
     component: SignupComponent,
     // canActivate: [AuthenticationGuard],
   },
+  {
+    path: 'room',
+    loadChildren: () =>
+      import('./room/room.module').then(
+        (module) => module.RoomModule
+      ),
+  },
   { path: 'stream/:roomId/:type', component: VideoComponent },
-  { path: 'room/create', component: NewroomComponent },
   { path: 'dashboard', component: DashboardComponent },
   // {
   //   path: 'courses',
