@@ -7,6 +7,11 @@ import { VideoService } from './video.service';
 import { store } from '../shared/store/store'
 import { updateRoom } from '../shared/store/actions';
 import { Room } from '../shared/model/room';
+import { User } from '../shared/model/user';
+
+declare global {
+  interface Window { stream: any; }
+}
 
 @Component({
   selector: 'app-video',
@@ -27,6 +32,47 @@ export class VideoComponent implements OnInit, OnDestroy {
   type: string = ''
   showCanvas: boolean = false
   room: Room = Room.EMPTY_ROOM
+  user: User = User.EMPTY_USER
+  controls: any = [
+    {
+      icon: 'microphone',
+      toggleIcon: 'microphone-slash',
+      title: 'Mic',
+      action: 'toggleAudio',
+      handled: false
+    },
+    {
+      icon: 'video',
+      title: 'Video',
+      toggleIcon: 'video-slash',
+      action: 'toggleVideo',
+      handled: false
+    },
+    {
+      icon: 'user-plus',
+      title: 'Add user',
+      action: 'handleInvite',
+      handled: false
+    },
+    {
+      icon: 'times-circle',
+      title: 'Leave',
+      action: 'handleLeaveRoom',
+      handled: false
+    },
+    {
+      icon: 'times-circle',
+      title: 'Stop',
+      action: 'handleStopMeeting',
+      handled: false
+    },
+    // {
+    //   icon: 'expand',
+    //   title: 'Full screen',
+    //   action: 'toggleFullscreen',
+    //   handled: false
+    // },
+  ]
 
   @ViewChild('videoRef') videoRef: any = null;
 
@@ -37,7 +83,10 @@ export class VideoComponent implements OnInit, OnDestroy {
 
     this.roomId = this.activatedRoute.snapshot.paramMap.get('roomId')!
     this.type = this.activatedRoute.snapshot.paramMap.get('type')!
-    store.subscribe(() => { this.room = store.getState().room })
+    store.subscribe(() => {
+      this.room = store.getState().room
+      this.user = store.getState().user
+    })
   }
 
   ngOnDestroy(): void {
@@ -46,12 +95,16 @@ export class VideoComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    if (this.type === 'continue') {
-      this.endStream();
-      this.startStream();
-    } else {
-      this.startRoom();
-    }
+    // if (this.type === 'continue') {
+    //   this.endStream();
+    //   this.startStream();
+    // } else {
+    //   this.startRoom();
+    // }
+  }
+
+  handleControls(action: Exclude<keyof VideoComponent, 'handleControls'>) {
+    this[action]()
   }
 
   joinMeeting(): Promise<boolean> {
@@ -116,8 +169,6 @@ export class VideoComponent implements OnInit, OnDestroy {
     eyeson.start(this.accessKey)
     eyeson.onEvent(this.handleEvent.bind(this))
 
-    // this.toggleAudio();
-    // this.toggleVideo();
     // ModalBus.$on('toggleAudio', ({ action }) => {
     //   if (action === 'toggleAudio') {
     //     this.toggleAudio();
@@ -134,6 +185,32 @@ export class VideoComponent implements OnInit, OnDestroy {
     //   }
     // })
 
+  }
+
+  async handleStopMeeting() {
+    const stopped = await this.videoService
+    .post(`rooms/${this.roomId}/stop`, {})
+
+    if (stopped) {
+      this.handleLeaveRoom();
+    }
+  }
+
+  async handleLeaveRoom() {
+    if (Object.keys(this.user).length) {
+      this.router.navigateByUrl('dashboard');
+    } else {
+      this.router.navigateByUrl('login');
+    }
+    this.stopAudio();
+  }
+
+  stopAudio() {
+    if (window.stream) {
+      window.stream.getTracks().forEach((track: any) => {
+        track.stop();
+      });
+    }
   }
 
   toggleAudio() {

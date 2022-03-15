@@ -20,3 +20,21 @@
     style="border-radius: 60px; background: #989c9f;"
   ></canvas>
 </div>
+
+<div *ngIf="stream" class="controls fixed
+ bg-white shadow-sidebar p-4 rounded-lg
+  top-20 flex flex-col
+  right-0 mr-4">
+  <button
+    *ngFor="let control of controls"
+    [ngStyle]="{
+      'border-color': 'rgba(0,0,0,.3)',
+      'background-color': !control.handled ? '#184a56' : '#e21b38'
+    }"
+    class="first:rounded-l last:rounded-r border-r last:border-none
+    py-1 px-2 my-2 text-white flex flex-col items-center h-12 justify-around shadow"
+    (click)="handleControls(control.action)"
+  >
+    <span class="text-xs">{{ control.title }}</span>
+  </button>
+</div>
