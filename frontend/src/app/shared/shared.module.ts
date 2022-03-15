@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { InputComponent } from './components/input.component';
 import { ButtonComponent } from './components/button.component';
 import { ColorizeDirective } from './directive/colorize.directive';
+import { ModalsComponent } from './components/modals.component';
 
 @NgModule({
   declarations: [
     InputComponent,
     ButtonComponent,
-    ColorizeDirective
+    ColorizeDirective,
+    ModalsComponent
   ],
   imports: [
     CommonModule

@@ -31,7 +31,7 @@ module.exports = (app) => {
     const { userId } = req.user;
 
     const rooms = await roomService.getAllPopulated({
-      members: { $in: [userId] },
+      members: { $in: [userId] }
     });
 
     const populatedRooms = await addMembersDetail(rooms.slice());
@@ -114,18 +114,18 @@ module.exports = (app) => {
     async (req, res) => {
       const { roomId } = req.params;
       const { email } = req.body;
-      const user = await userService.getOne({ email: email });
-      const { _id } = user;
+      const { _id } = await userService.getOne({ email });
+      const id = _id.toString()
 
       const room = await roomService.getOne({ roomId });
 
       if (!room)
         return res.status().json(formatError('roomId', 'Room not found.'));
 
-      if (room.userId == _id || room.members.includes(_id))
+      if (room.userId == id || room.members.includes(id))
         return res.status(200).json({ data: { joined: true, room } });
 
-      const members = [...room.members, _id];
+      const members = [...room.members, id];
 
       const updated = await roomService.updateById(room.id, { members });
 
