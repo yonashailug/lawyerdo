@@ -48,4 +48,8 @@ export class RoomlistComponent implements OnInit {
       }
     }
   }
+
+  goto() {
+    this.router.navigateByUrl('room/create')
+  }
 }
