@@ -4,6 +4,7 @@ import { User } from './shared/model/user';
 import { store } from './shared/store/store';
 import { addUser } from './shared/store/actions';
 import { UserService } from './shared/services/user.service';
+import { HomeComponent } from './home/home.component';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,7 @@ export class AppComponent implements OnInit, OnDestroy {
   title = 'frontend';
   user: User = User.EMPTY_USER;
   subscription: any = {};
+  homeComponent: HomeComponent = new HomeComponent()
 
   constructor(private userService: UserService) {
     this.subscription = store.subscribe(() => {

@@ -9,6 +9,7 @@ export function addUser(user: User) {
 }
 
 export function updateRoom(room: Room) {
+  console.log(room)
   return {
     type: 'UPDATE_ROOM',
     payload: room,
@@ -30,7 +31,6 @@ export function removeRoom(id: string) {
 }
 
 export function addRooms(rooms: Room[]) {
-  console.log(rooms)
   return {
     type: 'SET_ROOMS',
     payload: rooms
