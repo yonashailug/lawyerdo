@@ -55,12 +55,6 @@ export class VideoComponent implements OnInit, OnDestroy {
       handled: false,
     },
     {
-      icon: 'user-plus',
-      title: 'Add user',
-      action: 'handleInvite',
-      handled: false,
-    },
-    {
       icon: 'times-circle',
       title: 'Leave',
       action: 'handleLeaveRoom',
