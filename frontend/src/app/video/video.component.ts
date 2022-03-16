@@ -1,6 +1,5 @@
 import {
   Component,
-  ElementRef,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -53,12 +52,6 @@ export class VideoComponent implements OnInit, OnDestroy {
       title: 'Video',
       toggleIcon: 'video-slash',
       action: 'toggleVideo',
-      handled: false,
-    },
-    {
-      icon: 'user-plus',
-      title: 'Add user',
-      action: 'handleInvite',
       handled: false,
     },
     {

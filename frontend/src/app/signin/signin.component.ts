@@ -13,7 +13,6 @@ import { UserService } from '../shared/services/user.service';
   selector: 'app-signin',
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.scss'],
-  // providers: [SigninService]
 })
 export class SigninComponent implements OnInit {
   signinForm: FormGroup;
@@ -36,9 +35,6 @@ export class SigninComponent implements OnInit {
   signin() {
     const email: string = this.signinForm.get('email')!.value;
     const password: string = this.signinForm.get('password')!.value;
-
-    //TODO: - Validate email: @,.,length,
-    //TODO: - Validate password: Accepts only string type
 
     this.signinService.signin({ email, password }).subscribe((data) => {
       this.getUserFromToken(data);

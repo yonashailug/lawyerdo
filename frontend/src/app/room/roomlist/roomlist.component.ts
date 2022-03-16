@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Room } from '../shared/model/room';
-import { User } from '../shared/model/user';
-import { TokenService } from '../shared/services/token.service';
-import { addRooms, removeRoom } from '../shared/store/actions';
-import { store } from '../shared/store/store';
+import { EventBus } from 'src/app/shared/services/eventBus';
+import { Room } from '../../shared/model/room';
+import { User } from '../../shared/model/user';
+import { addRooms, removeRoom } from '../../shared/store/actions';
+import { store } from '../../shared/store/store';
 import { RoomListService } from './roomlist.service';
 
 @Component({
@@ -17,10 +16,9 @@ export class RoomlistComponent implements OnInit {
   roomDetails: Room = Room.EMPTY_ROOM;
   hideDiv = false;
   constructor(
-    private router: Router,
-    private roomlistService: RoomListService
+    private roomlistService: RoomListService,
+    private eventBus: EventBus,
   ) {
-    // this.rooms = store.getState().rooms
     store.subscribe(() => {
       this.rooms = store.getState().rooms
     })
@@ -45,13 +43,10 @@ export class RoomlistComponent implements OnInit {
   deleteRoom(id: any) {
     this.roomlistService.deleteroom(id).subscribe({
       next: (res) => {
-        // console.log(res);
-        // this.router.navigate(['dashboard']);
         store.dispatch(removeRoom(id))
       },
       error: (e) => console.error(e),
     });
-    console.log(id);
   }
 
   roomDetail(id: any) {
@@ -64,6 +59,6 @@ export class RoomlistComponent implements OnInit {
   }
 
   goto() {
-    this.router.navigateByUrl('room/create');
+    this.eventBus.eventBus.emit('createRoom')
   }
 }

@@ -13,10 +13,8 @@ import { store } from '../shared/store/store';
   styles: [],
 })
 export class ProfileComponent implements OnInit, OnDestroy {
-  //user2: any;
   @Input() user: User = User.EMPTY_USER;
   subscription: any = {};
-  // sub: Subscription | undefined;
   isOpen: boolean = false;
 
   constructor(
@@ -39,8 +37,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // this.user = this.tokenService.getUser();
-    // console.log(this.user.getName());
   }
 
   ngOnDestroy() {

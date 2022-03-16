@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
-import { BASE_URL } from '../config';
+import { BASE_URL } from '../../config';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AddmemberService {
+export class MemberService {
   constructor(private httpClient: HttpClient) {}
 
   checkMember(email: string, room: any[]): boolean {

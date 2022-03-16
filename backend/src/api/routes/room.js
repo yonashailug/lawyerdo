@@ -114,7 +114,14 @@ module.exports = (app) => {
     async (req, res) => {
       const { roomId } = req.params;
       const { email } = req.body;
-      const { _id } = await userService.getOne({ email });
+      const user = await userService.getOne({ email });
+
+      if (!user) return res.status(404).json({
+        errors: 'User not found',
+      });
+
+      const { _id } = user
+      
       const id = _id.toString()
 
       const room = await roomService.getOne({ roomId });
