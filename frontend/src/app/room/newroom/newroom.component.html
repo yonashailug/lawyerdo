@@ -1,0 +1,46 @@
+<div class="w-full">
+  <div class="w-full flex flex-row h-full">
+    <div class="w-full flex justify-center">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form
+            [formGroup]="newRoomForm"
+            (ngSubmit)="handleSubmit()"
+            class="w-full h-full"
+          >
+            <div class="modal-body p-4">
+              <div class="text-center">
+                <div class="block">
+                  <h4 class="m-auto mb-2 font-bold">Create New Room</h4>
+                </div>
+              </div>
+              <div class="formField">
+                <label class="formFieldLabel" htmlFor="name">Room Name</label>
+                <div class="relative">
+                  <app-input
+                    (inputOnBlurEvent)="setFormData($event)"
+                    [name]="'name'"
+                  ></app-input>
+                </div>
+                <div class="formFieldTip"></div>
+              </div>
+            </div>
+
+            <div class="modal-footer p-4">
+              <div class="text-center">
+                <app-button (onBtnClick)="handleSubmit()">Create</app-button>
+                <!-- <button
+                  type="submit"
+                  class="btn btn-primary"
+                  [disabled]="!newRoomForm.valid"
+                >
+                  Create
+                </button> -->
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
