@@ -63,10 +63,6 @@ export class SignupComponent implements OnDestroy, OnInit {
       });
   }
 
-  // get email() {
-  //   return this.signupForm.get('email')!;
-  // }
-
   emailValidator(
     control: FormControl
   ):

@@ -14,7 +14,6 @@ import { AuthenticationService } from './authentication.service';
 })
 export class AuthenticationGuard implements CanActivate {
   constructor(
-    private router: Router,
     private authenticationService: AuthenticationService
   ) {}
 
@@ -27,10 +26,8 @@ export class AuthenticationGuard implements CanActivate {
     | boolean
     | UrlTree {
     if (this.authenticationService.isUserAlreadySignIn()) {
-      this.router.navigate(['dashboard']);
+      return true
     }
-
-    this.router.navigate(['signin']);
 
     return false;
   }

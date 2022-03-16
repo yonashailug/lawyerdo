@@ -16,13 +16,9 @@ export class AuthorizationGuard implements CanActivate {
 
       const user: User = this.authenticationService.getUser()
 
+      // Mark: - we will no longer used roles
       let activate = false
       if(Object.keys(user).length) {
-
-          // TODO: - Do something with a role
-          // let userScope = user.getRole().toUpperCase()
-          // let scopes = route.data['scopes'] as Array<string>
-          // activate = (scopes && scopes.length === 0 || scopes.indexOf(userScope) != -1)
 
           activate = true
       }

@@ -15,7 +15,6 @@ import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
 import { NavbarComponent } from './navbar/navbar/navbar.component';
 import { RoomModule } from './room/room.module';
-import { RoomlistComponent } from './room/roomlist/roomlist.component';
 
 @NgModule({
   declarations: [

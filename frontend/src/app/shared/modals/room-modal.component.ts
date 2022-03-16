@@ -1,8 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AdComponent } from '../components/ad.component';
-import { EventBus } from '../services/eventBus';
+import { AComponent } from '../components/a.component';
 import { RoomService } from '../services/room.service';
 
 @Component({
@@ -34,25 +33,6 @@ import { RoomService } from '../services/room.service';
 
         <div class="modal-footer p-4 border-t border-gray-500">
           <div class="text-center flex justify-end">
-            <!-- <Button
-              style="background-color: rgb(190 195 199); color: white"
-              class="uppercase shadow rounded text-sm text-white"
-              type="submit"
-              :variant="'secondary'"
-              @click="close"
-            >
-              abbrechen
-            </Button>
-            <Button
-              btn_type='small'
-              @click="handleSubmit"
-              :disabled="!isValidDTO"
-              :isWorking="isWorking"
-              class="ml-2 flex justify-center uppercase shadow rounded text-sm"
-              :variant="'primary'"
-            >
-              weiter
-            </Button> -->
             <app-button (onBtnClick)="handlClose()" [variant]="'secondary'" [ngClass]="['mr-2']">Close</app-button>
             <app-button (onBtnClick)="handleSubmit()">Create</app-button>
           </div>
@@ -64,7 +44,7 @@ import { RoomService } from '../services/room.service';
   styles: [
   ]
 })
-export class RoomModalComponent implements OnInit, AdComponent {
+export class RoomModalComponent implements OnInit, AComponent {
 
   newRoomForm: FormGroup;
 

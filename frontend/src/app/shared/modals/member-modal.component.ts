@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
-import { AdComponent } from '../components/ad.component';
+import { AComponent } from '../components/a.component';
 import { Room } from '../model/room';
 import { MemberService } from '../services/member.service';
 import { store } from '../store/store';
@@ -46,7 +46,7 @@ import { store } from '../store/store';
   styles: [
   ]
 })
-export class MemberModalComponent implements OnInit, AdComponent {
+export class MemberModalComponent implements OnInit, AComponent {
 
   memberForm: FormGroup;
   room: Room = new Room();

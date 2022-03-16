@@ -1,13 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
 import { ModalDirective } from '../directive/modal.directive';
-import { AdComponent } from './ad.component';
+import { AComponent } from './a.component';
 
 @Component({
   selector: 'app-modal',
   template: `
-  <div ref="rootRef" class="scrollOverlay">
+  <div class="scrollOverlay">
     <div [ngClass]="['clickableOverlay', variant]">
-      <div ref="modalRef" [ngStyle]="{width: '30rem'}" [ngClass]="['modal', variant]">
+      <div [ngStyle]="{width: '30rem'}" [ngClass]="['modal', variant]">
         <ng-template modalHost (close)="handleClose()"></ng-template>
       </div>
     </div>
@@ -15,7 +15,6 @@ import { AdComponent } from './ad.component';
   `,
   styles: [
     `
-
     `
   ]
 })
@@ -39,7 +38,7 @@ export class ModalComponent implements OnInit {
     const viewContainerRef: ViewContainerRef = this.modalHost.viewContainerRef;
     viewContainerRef.clear();
 
-    const componentRef: any = viewContainerRef.createComponent<AdComponent>(this.componentProps);
+    const componentRef: any = viewContainerRef.createComponent<AComponent>(this.componentProps);
     componentRef.instance.close.subscribe((e: any) => {
       this.handleClose(e)
     })
