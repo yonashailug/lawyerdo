@@ -1,22 +1,22 @@
 {
-  "name": "homework-06-yonashailug",
+  "name": "backend",
   "version": "1.0.0",
-  "description": "Create an Express application that implements a Restful Stateless API for an entity called `students`:\r ```javascript\r let students = [{id: 1, name: \"Asaad Saad\", course: \"CS572\", grade: 95}]\r ```\r * Take into consideration that `students` entity should be treated as an immutable data structure.\r * Have in mind to have a separation between the Routing layer and the Controllers layer. \r * Write routes for the following CRUD operations and use the proper HTTP verbs (`GET` one and all,`POST`, `PUT`, and `DELETE`).\r * Test with `HTTP Client` extension for VSCode. (or any other client)\r * Your API accepts and returns `JSON` data from/to req/res body.\r * Log all requests to a file `access.log` using `morgan` middleware. \r * For your `POST` and `PUT` routes, create and apply a custom middleware to verify if a the `JSON` object contains `name`, `course` and `grade`, otherwise send back an error.\r * Accept all cross-domain XHR requests using `cors` middleware.",
+  "description": "Lawyerdo is a video call web application that enables lawyers to communicate with their clients about their cases and daily activities about their progress.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/maharishi-university/homework-06-yonashailug.git"
+    "url": "git+https://github.com/yonashailug/lawyerdo.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/maharishi-university/homework-06-yonashailug/issues"
+    "url": "https://github.com/yonashailug/lawyerdo/issues"
   },
-  "homepage": "https://github.com/maharishi-university/homework-06-yonashailug#readme",
+  "homepage": "https://github.com/yonashailug/lawyerdo#readme",
   "dependencies": {
     "argon2": "^0.28.5",
     "axios": "^0.26.1",
