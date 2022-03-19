@@ -10,6 +10,7 @@ import { RoomModalComponent } from './modals/room-modal.component';
 import { EventBus } from './services/eventBus';
 import { MemberModalComponent } from './modals/member-modal.component';
 import { MemberService } from './services/member.service';
+import { IconComponent } from './components/icon.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { MemberService } from './services/member.service';
     ModalComponent,
     ModalDirective,
     RoomModalComponent,
-    MemberModalComponent
+    MemberModalComponent,
+    IconComponent
   ],
   imports: [
     CommonModule
@@ -32,7 +34,8 @@ import { MemberService } from './services/member.service';
   exports: [
     InputComponent,
     ButtonComponent,
-    ModalsComponent
+    ModalsComponent,
+    IconComponent
   ]
 })
 export class SharedModule { }

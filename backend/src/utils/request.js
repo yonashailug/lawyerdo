@@ -8,7 +8,7 @@ const API_CALL = axios.create({
 
 API_CALL.defaults.headers['Authorization'] = eyesonApiKey
 
-module.exports = async function makeRequest(path, data, method = 'POST') {
+module.exports = async (path, data, method = 'POST') => {
 
   try {
 

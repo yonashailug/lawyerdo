@@ -21,8 +21,8 @@
   ></canvas>
 </div>
 
-<div *ngIf="!isStreamEmpty()" class="controls fixed
- bg-white shadow-sidebar p-4 rounded-lg
+<div  class="controls fixed
+ bg-white shadow-sidebar p-2 rounded-lg
   top-20 flex flex-col
   right-0 mr-4">
   <button
@@ -35,6 +35,7 @@
     py-1 px-2 my-2 text-white flex flex-col items-center h-12 justify-around shadow"
     (click)="handleControls(control.action)"
   >
-    <span class="text-xs">{{ control.title }}</span>
+    <!-- <span class="text-xs">{{ control.title }}</span> -->
+    <app-icon [name]="control.icon"></app-icon>
   </button>
 </div>

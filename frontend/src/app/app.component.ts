@@ -5,6 +5,7 @@ import { store } from './shared/store/store';
 import { addUser } from './shared/store/actions';
 import { UserService } from './shared/services/user.service';
 import { HomeComponent } from './home/home.component';
+import loadSvg from './plugins/loadSvg'
 
 @Component({
   selector: 'app-root',
@@ -27,6 +28,7 @@ export class AppComponent implements OnInit, OnDestroy {
     if (Object.keys(this.user).length) {
       store.dispatch(addUser(User.fromObject(this.userService.getUser())));
     }
+    loadSvg()
   }
 
   ngOnDestroy() {

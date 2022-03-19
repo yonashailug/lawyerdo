@@ -15,10 +15,6 @@ if (!fs.existsSync(config.path.upload.images)) {
 
 module.exports = (app) => {
 
-    // Health check
-    app.get('/status', (req, res) => {
-        res.status(200).end()
-    })
 
     app.use(cors())
 
