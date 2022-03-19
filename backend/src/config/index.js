@@ -2,8 +2,6 @@ const dotenv = require('dotenv').config()
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'dev'
 
-// do some checks here
-
 module.exports = {
     port: parseInt(process.env.PORT, 10),
     api: {
