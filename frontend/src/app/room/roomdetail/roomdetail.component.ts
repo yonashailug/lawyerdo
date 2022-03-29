@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { Room } from 'src/app/shared/model/room';
-import { EventBus } from 'src/app/shared/services/eventBus';
-import { updateRoom } from 'src/app/shared/store/actions';
-import { store } from 'src/app/shared/store/store';
+import { store } from '../../shared/store/store';
+import { Room } from '../../shared/model/room';
+import { EventBus } from '../../shared/services/eventBus';
+import { updateRoom } from '../../shared/store/actions';
 
 @Component({
   selector: 'app-roomdetail',
@@ -17,7 +17,6 @@ export class RoomdetailComponent implements OnInit {
   constructor(private router: Router, private eventBus: EventBus) {}
 
   ngOnInit(): void {
-    // console.log(this.roomDetails);
   }
 
   handleNavigate() {
@@ -30,7 +29,6 @@ export class RoomdetailComponent implements OnInit {
   // }
 
   addMember() {
-    console.log(this.roomDetails)
     store.dispatch(updateRoom(this.roomDetails))
     this.eventBus.eventBus.emit('addMember')
   }

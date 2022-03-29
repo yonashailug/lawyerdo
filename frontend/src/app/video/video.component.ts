@@ -1,6 +1,5 @@
 import {
   Component,
-  ElementRef,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -42,33 +41,27 @@ export class VideoComponent implements OnInit, OnDestroy {
   user: User = User.EMPTY_USER;
   controls: any = [
     {
-      icon: 'microphone',
+      icon: 'mic',
       toggleIcon: 'microphone-slash',
       title: 'Mic',
       action: 'toggleAudio',
       handled: false,
     },
     {
-      icon: 'video',
+      icon: 'videocam',
       title: 'Video',
       toggleIcon: 'video-slash',
       action: 'toggleVideo',
       handled: false,
     },
     {
-      icon: 'user-plus',
-      title: 'Add user',
-      action: 'handleInvite',
-      handled: false,
-    },
-    {
-      icon: 'times-circle',
+      icon: 'times',
       title: 'Leave',
       action: 'handleLeaveRoom',
       handled: false,
     },
     {
-      icon: 'times-circle',
+      icon: 'times',
       title: 'Stop',
       action: 'handleStopMeeting',
       handled: false,

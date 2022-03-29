@@ -98,9 +98,6 @@ export class InputComponent implements OnInit {
   @Input() iconSize = 16;
 
   @Output() inputOnBlurEvent: EventEmitter<string> = new EventEmitter<string>();
-  // @Output() onBlur = (e: any) => {
-  //   this.inputOnBlurEvent.emit(e);
-  // };
   @Input() onChange = (e: Event) => {
     console.log(e);
   };

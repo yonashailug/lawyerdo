@@ -5,9 +5,9 @@ import { AdComponent } from './ad.component';
 @Component({
   selector: 'app-modal',
   template: `
-  <div ref="rootRef" class="scrollOverlay">
+  <div class="scrollOverlay">
     <div [ngClass]="['clickableOverlay', variant]">
-      <div ref="modalRef" [ngStyle]="{width: '30rem'}" [ngClass]="['modal', variant]">
+      <div [ngStyle]="{width: '30rem'}" [ngClass]="['modal', variant]">
         <ng-template modalHost (close)="handleClose()"></ng-template>
       </div>
     </div>
@@ -15,7 +15,6 @@ import { AdComponent } from './ad.component';
   `,
   styles: [
     `
-
     `
   ]
 })

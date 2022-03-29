@@ -4,7 +4,7 @@ module.exports = async (req, res, next) => {
 
   try {
 
-    const userRecord = await userService.getById(req.token.id)
+    const userRecord = await userService.getById(req.userInfo.id)
 
     if (!userRecord)
       return res.status(401).json({
