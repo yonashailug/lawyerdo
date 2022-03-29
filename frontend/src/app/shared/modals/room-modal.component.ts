@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AComponent } from '../components/a.component';
+import { AdComponent } from '../components/ad.component';
 import { RoomService } from '../services/room.service';
 
 @Component({
@@ -44,7 +44,7 @@ import { RoomService } from '../services/room.service';
   styles: [
   ]
 })
-export class RoomModalComponent implements OnInit, AComponent {
+export class RoomModalComponent implements OnInit, AdComponent {
 
   newRoomForm: FormGroup;
 

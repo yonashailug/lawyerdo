@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { EventBus } from 'src/app/shared/services/eventBus';
 import { Room } from '../../shared/model/room';
 import { User } from '../../shared/model/user';
+import { EventBus } from '../../shared/services/eventBus';
 import { addRooms, removeRoom } from '../../shared/store/actions';
 import { store } from '../../shared/store/store';
 import { RoomListService } from './roomlist.service';
@@ -61,4 +61,6 @@ export class RoomlistComponent implements OnInit {
   goto() {
     this.eventBus.eventBus.emit('createRoom')
   }
+
+
 }

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
 import { ModalDirective } from '../directive/modal.directive';
-import { AComponent } from './a.component';
+import { AdComponent } from './ad.component';
 
 @Component({
   selector: 'app-modal',
@@ -38,7 +38,7 @@ export class ModalComponent implements OnInit {
     const viewContainerRef: ViewContainerRef = this.modalHost.viewContainerRef;
     viewContainerRef.clear();
 
-    const componentRef: any = viewContainerRef.createComponent<AComponent>(this.componentProps);
+    const componentRef: any = viewContainerRef.createComponent<AdComponent>(this.componentProps);
     componentRef.instance.close.subscribe((e: any) => {
       this.handleClose(e)
     })

@@ -23,6 +23,11 @@ export class RoomdetailComponent implements OnInit {
     this.router.navigateByUrl(`/stream/${this.roomDetails.getRoomId()}/start`);
   }
 
+  // addMember() {
+  //   this.room = this.roomDetails;
+  //   this.hideDiv = false;
+  // }
+
   addMember() {
     store.dispatch(updateRoom(this.roomDetails))
     this.eventBus.eventBus.emit('addMember')

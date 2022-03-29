@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AdComponent } from '../shared/components/ad.component';
 
 @Component({
   selector: 'app-home',
