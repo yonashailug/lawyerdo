@@ -1,6 +1,8 @@
 ### Lawyerdo is a video call web application that enables lawyers to communicate with their clients about their cases and daily activities about their progress.
 Technologies - Nodejs, Expressjs, Mongoose, Angular, Eyeson API
 
+![Lawyerdo](lawyerdo.gif?raw=true "Lawyerdo")
+
 ### Setup Frontend
 
 Navigate to `fronend` folder and run `npm install` or `yarn`
