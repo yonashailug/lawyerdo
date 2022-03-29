@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Room } from '../shared/model/room';
 import { User } from '../shared/model/user';
+import { EventBus } from '../shared/services/eventBus';
 import { TokenService } from '../shared/services/token.service';
 import { addRooms, removeRoom } from '../shared/store/actions';
 import { store } from '../shared/store/store';
@@ -18,7 +19,8 @@ export class RoomlistComponent implements OnInit {
   hideDiv = false;
   constructor(
     private router: Router,
-    private roomlistService: RoomListService
+    private roomlistService: RoomListService,
+    private eventBus: EventBus,
   ) {
     // this.rooms = store.getState().rooms
     store.subscribe(() => {
@@ -64,6 +66,10 @@ export class RoomlistComponent implements OnInit {
   }
 
   goto() {
-    this.router.navigateByUrl('room/create');
+    // this.router.navigateByUrl('room/create');
+    console.log('emitted')
+    this.eventBus.eventBus.emit('createRoom')
   }
+
+
 }
